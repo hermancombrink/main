@@ -484,9 +484,13 @@ header.header:after {
 	color:#fff;
 	text-decoration:none;
 }
+@media (min-width: 766px) {
+    .header-info_layer.layer_mob { display:none; }
+    }
 @media (max-width: 767px) {
 	.header-info { height:530px; }
 	.header-info_layer.layer_2 { display:none; }
+    .header-info_layer.layer_mob { display:block; width:100%;}
 	.header-info_layer.layer_3 {
 		width:100%;
 		left:0;
