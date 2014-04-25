@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="Home" action="Index" description="My Personal Portfolio">
+    <mvcSiteMapNode title="About" controller="Home" action="About" description="What is between the book's cover"/>
+    <mvcSiteMapNode title="Contact" controller="Home" action="Contact" description="Get in touch with me"/>
+    <mvcSiteMapNode title="Portfolio" controller="Home" action="Portfolio" description="What I have done">
+      <mvcSiteMapNode title="Career" controller="Home" action="Career" description="My professional hisotry"/>
+      <mvcSiteMapNode title="Skills" controller="Home" action="Skills" description="How I meassure up"/>
+      <mvcSiteMapNode title="Studies" controller="Home" action="Studies" description="See the papers"/>
+      <mvcSiteMapNode title="References" controller="Home" action="References" description="Ask my friends"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Hobbies" controller="Home" action="Hobbies" description="What makes me tick">
+      <mvcSiteMapNode title="Gallery" controller="Home" action="Gallery" description="The good times"/>
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+</mvcSiteMap>

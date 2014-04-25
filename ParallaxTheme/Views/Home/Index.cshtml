@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Herman Combrink";
+    ViewBag.ShowMain = true;
+}
+
+
+<div class="features-row">
+    <div class="span4">
+        @Html.HoverLink("About", "What is between the book's cover", "type-1", "icon-user", "484485", "About")
+    </div>
+    <div class="span4">
+        @Html.HoverLink("Contact", "Get in touch with me", "type-2", "icon-envelope", "933F57", "Contact")
+    </div>
+    <div class="span4">
+        @Html.HoverLink("Portfolio", "What I have done", "type-3", "icon-globe", "57913E", "Portfolio")
+    </div>
+</div>
+<div class="features-row">
+    <div class="span4">
+        @Html.HoverLink("Career", "My professional history", "type-4", "icon-road", "9A8642", "Career")
+    </div>
+    <div class="span4">
+        @Html.HoverLink("Development Skills", "How I meassure up", "type-5", "icon-keyboard", "484485", "Skills")
+    </div>
+    <div class="span4">
+        @Html.HoverLink("References", "Ask my friends", "type-6", "icon-group", "933F57", "References")
+    </div>
+</div>
+<div class="features-row">
+    <div class="span4">
+        @Html.HoverLink("Studies", "See the papers", "type-7", "icon-book", "57913E", "Studies")
+    </div>
+    <div class="span4">
+        @Html.HoverLink("Hobbies", "What makes me tick", "type-8", "icon-rocket", "9A8642", "Hobbies")
+    </div>
+    <div class="span4">
+        @Html.HoverLink("Gallery", "The good times", "type-1", "icon-picture", "484485", "Gallery")
+    </div>
+</div>
+<div class="sm_spacer"></div>
+@section Scripts
+{
+    <script>
+        (function ($) {
+            ////$('.search-form__h .search-trigger').click(function(){
+            ////    if ($(this).hasClass('active')) {
+            ////       $(this).removeClass('active icon-remove').addClass('icon-search').next().fadeOut(300);
+            ////    } else {
+            ////       $(this).removeClass('icon-search').addClass('active icon-remove').next().fadeIn(300);
+            ////    }
+            ////})
+
+            var resizeTimer = null;
+            var obj = $('.header-info-home .header-info_layer').not('.ie8 .header-info-home .header-info_layer').clone();
+            if ($(window).width() > 768) {
+                $('.header-info-home .header-info_layer').not('.ie8 .header-info-home .header-info_layer').parallax(
+                    {
+                        mouseport: '.header-info-home',
+                        xparallax: 0.2,
+                        yparallax: false,
+                        decay: 0.7,
+                        frameDuration: 20,
+                        freezeClass: 'freeze'
+                    },
+                    {
+                        mouseport: '.header-info-home',
+                        xparallax: 0.2,
+                        yparallax: false,
+                        decay: 0.7,
+                        frameDuration: 20,
+                        freezeClass: 'freeze'
+                    },
+                    {
+                        mouseport: '.header-info-home',
+                        xparallax: 0.4,
+                        yparallax: false,
+                        decay: 0.7,
+                        frameDuration: 20,
+                        freezeClass: 'freeze'
+                    }
+                );
+            }
+
+            $(window).resize(function () {
+                resizeTimer && clearTimeout(resizeTimer); // Cleraring old timer to avoid unwanted resize calls.
+                resizeTimer = setTimeout(function () {
+                    $('.header-info-home .header-info_layer').not('.ie8 .header-info-home .header-info_layer').closest(".header-info-home .header-info_layer").replaceWith($(obj).clone());
+                    if ($(window).width() > 768) {
+                        $('.header-info-home .header-info_layer').not('.ie8 .header-info-home .header-info_layer').parallax(
+                            {
+                                mouseport: '.header-info-home',
+                                xparallax: 0.2,
+                                yparallax: false,
+                                decay: 0.7,
+                                frameDuration: 20,
+                                freezeClass: 'freeze'
+                            },
+                            {
+                                mouseport: '.header-info-home',
+                                xparallax: 0.2,
+                                yparallax: false,
+                                decay: 0.7,
+                                frameDuration: 20,
+                                freezeClass: 'freeze'
+                            },
+                            {
+                                mouseport: '.header-info-home',
+                                xparallax: 0.4,
+                                yparallax: false,
+                                decay: 0.7,
+                                frameDuration: 20,
+                                freezeClass: 'freeze'
+                            }
+                        );
+                    }
+                }, 200);
+            });
+
+
+        })(jQuery);
+    </script>
+}

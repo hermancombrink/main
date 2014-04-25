@@ -1,0 +1,46 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.MenuHelperModel
+@using System.Activities.Expressions
+@using System.ServiceModel.Channels
+@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+<ul id="topnav" class="sf-menu sf-js-enabled">
+    @foreach (var node in Model.Nodes)
+    {
+        {
+            var cl = "";
+            var acl = "";
+            if (node.IsCurrentNode)
+            { cl += " current-menu-item current_page_item"; }
+            if (node.Children.Count > 0)
+            { acl += " sf-with-ul"; }
+
+        <li class="@cl">@Html.DisplayFor(m => node,
+            node.Key, new { @class = '"' + acl + '"' })
+            @if (node.Children.Any())
+            {
+                <ul class="sub-menu" style="visibility: hidden;">
+                    @foreach (var childnode in node.Children)
+                    {
+                        <li>@Html.DisplayFor(m => childnode)</li>
+                    }
+                </ul>
+            }
+        </li>
+        }
+    }
+</ul>
+<select id="mobtopnav" class="mobtopnav" onchange="location = this.options[this.selectedIndex].value;">
+     <option value="/">Go To...</option>
+    @foreach (var node in Model.Nodes)
+    {
+        <option value="/@node.Controller/@node.Action">@Html.DisplayFor(c => node)</option>
+        if (node.Children.Any())
+        {
+            foreach (var childnode in node.Children)
+            {
+                <option value="/@childnode.Controller/@childnode.Action">...@Html.DisplayFor(c => childnode)</option>
+            }
+        }
+    }
+</select>

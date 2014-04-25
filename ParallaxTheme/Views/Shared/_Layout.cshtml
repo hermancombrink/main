@@ -1,0 +1,160 @@
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://livedemo00.template-help.com/wordpress_45512/ -->
+<html lang="en-US" class=" js flexbox flexboxlegacy canvas canvastext draganddrop rgba multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients csstransitions generatedcontent video audio localstorage csstransforms csstransforms3d" style="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/parallax")
+    @RenderSection("Styles", false)
+    <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/modernizr.custom.17475.js"></script>
+    <script type="text/javascript" src="~/Scripts/superfish.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.parallax.js"></script>
+    @RenderSection("ScriptsHead", false)
+    <script type="text/javascript">
+        // Init navigation menu
+        jQuery(function () {
+            // main navigation init
+            jQuery('ul.sf-menu').superfish({
+                delay: 1000, 		// the delay in milliseconds that the mouse can remain outside a sub-menu without it closing
+                animation: { opacity: 'show', height: 'show' }, // used to animate the sub-menu open
+                speed: 'normal',  // animation speed 
+                autoArrows: true,   // generation of arrow mark-up (for submenu)
+                disableHI: true // to disable hoverIntent detection
+            });
+
+            //Zoom fix
+            //IPad/IPhone
+            var viewportmeta = document.querySelector && document.querySelector('meta[name="viewport"]'),
+                ua = navigator.userAgent,
+                gestureStart = function () {
+                    viewportmeta.content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+                },
+                scaleFix = function () {
+                    if (viewportmeta && /iPhone|iPad/.test(ua) && !/Opera Mini/.test(ua)) {
+                        viewportmeta.content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+                        document.addEventListener("gesturestart", gestureStart, false);
+                    }
+                };
+
+            scaleFix();
+        })
+    </script>
+</head>
+<body class="home page">
+    <div id="" class="main-holder">
+      
+        @if (ViewBag.ShowMain == null || !ViewBag.ShowMain)
+        {
+            <header class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12 header-row">
+                            <div class="row">
+                                <div class="span4">
+                                    <div class="logo">
+                                        <a class="logo_h logo_h__img">
+                                            <p class="logo_main">Herman Combrink</p>
+                                        </a>
+                                        <p class="logo_tagline">Portfolio</p>
+                                    </div>
+                                </div>
+                                <div class="span8">
+                                    <div class="hidden-phone">
+                                    </div>
+                                    <nav class="nav nav__primary clearfix">
+                                         @Html.MvcSiteMap().Menu()
+                                    
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        }
+        <div class="header-info header-info-home">
+          
+            <div class="header-info_layer layer_1">
+                <img src="~/Content/images/header-main.png" alt="">
+            </div>
+            @if (ViewBag.ShowMain != null && ViewBag.ShowMain)
+            {
+                <div class="header-info_layer layer_2" style="margin-top: 7px">
+                    <img src="~/Content/images/header-main-img.png" alt="">
+                </div>
+            }
+        </div>
+        <div class="content-holder clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="row">
+                            <div class="span12">
+                                <div class="row">
+                                    <div class="span12">
+                                       
+                                        <hgroup class="title-box clearfix ">
+                                            <h2 class="title-box_primary">
+                                                @if (ViewBag.ShowMain == null || !ViewBag.ShowMain)
+                                                {
+                                                    @ViewBag.Title
+                                                }
+                                            </h2>
+                                        </hgroup>
+                                       
+                                    </div>
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="row">
+                            <div class="span6 footer-widget">
+                                <div id="nav_menu-2">
+                                    <div>
+                                        <ul id="menu-bottom-menu" class="menu">
+                                            <li class="icon-facebook-sign"><a href="https://www.facebook.com/herman.combrink.5" target="_blank">Facebook</a></li>
+                                            <li class="icon-phone-sign"><a href="skype:herman.combrink?call" target="_blank">Skype</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6 copyright">
+                                <div id="footer-text" class="footer-text">
+                                    <a href="#" title="All you need!" class="site-name">Herman Combrink</a> © 2014
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row copyright">
+                            <div class="span12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="back-top-wrapper" class="visible-desktop">
+        <p id="back-top">
+            <a href="#top"><i class="icon-angle-up"></i></a>
+        </p>
+    </div>
+    @RenderSection("Scripts", false)
+    <script type="text/javascript" src="~/Scripts/custom.js"></script>
+    
+    
+</body>
+</html>
