@@ -2,7 +2,120 @@
     ViewBag.Title = "Gallery";
 }
 
+<div id="links">
 
-        <div>
-              
+    <a data-gallery="" title="First of the year - from Brawley" href="http://farm3.static.flickr.com/2908/14083150304_c08d7f0e08_b.jpg">
+        <img src="http://farm3.static.flickr.com/2908/14083150304_c08d7f0e08_s.jpg"></a>
+    <a data-gallery="" title="City Cat" href="http://farm8.static.flickr.com/7198/14101980413_3ec15e418b_b.jpg">
+        <img src="http://farm8.static.flickr.com/7198/14101980413_3ec15e418b_s.jpg"></a>
+    <a data-gallery="" title="January Light" href="http://farm8.static.flickr.com/7449/14100466853_2e92bf77e4_b.jpg">
+        <img src="http://farm8.static.flickr.com/7449/14100466853_2e92bf77e4_s.jpg"></a>
+    <a data-gallery="" title="Binalong Bay 4- Tasmania" href="http://farm8.static.flickr.com/7198/14100200203_137af72442_b.jpg">
+        <img src="http://farm8.static.flickr.com/7198/14100200203_137af72442_s.jpg"></a>
+    <a data-gallery="" title="Mt Fuji, Blue Sea, under the Cherry Tree" href="http://farm3.static.flickr.com/2907/14081134194_efd4ab94bc_b.jpg">
+        <img src="http://farm3.static.flickr.com/2907/14081134194_efd4ab94bc_s.jpg"></a>
+    <a data-gallery="" title="Ground control to Major Tom" href="http://farm3.static.flickr.com/2921/14080024004_587da2e532_b.jpg">
+        <img src="http://farm3.static.flickr.com/2921/14080024004_587da2e532_s.jpg"></a>
+    <a data-gallery="" title="Zebra House" href="http://farm8.static.flickr.com/7383/14079448341_e52aa5f7d0_b.jpg">
+        <img src="http://farm8.static.flickr.com/7383/14079448341_e52aa5f7d0_s.jpg"></a>
+    <a data-gallery="" title="Isle Of Grain Power Station. (Explored)" href="http://farm8.static.flickr.com/7204/14076514711_03210a6357_b.jpg">
+        <img src="http://farm8.static.flickr.com/7204/14076514711_03210a6357_s.jpg"></a>
+    <a data-gallery="" title="Maestro on his side" href="http://farm8.static.flickr.com/7350/14057694356_39fd3a3aac_b.jpg">
+        <img src="http://farm8.static.flickr.com/7350/14057694356_39fd3a3aac_s.jpg"></a>
+    <a data-gallery="" title="Red sunset / Roter Sonnenuntergang (Explore)" href="http://farm6.static.flickr.com/5531/13897470480_9d26e54bcc_b.jpg">
+        <img src="http://farm6.static.flickr.com/5531/13897470480_9d26e54bcc_s.jpg"></a>
+    <a data-gallery="" title="Come In!" href="http://farm6.static.flickr.com/5473/13897114150_6aa11a1fea_b.jpg">
+        <img src="http://farm6.static.flickr.com/5473/13897114150_6aa11a1fea_s.jpg"></a>
+</div>
+
+@section Modal
+{
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Previous
+                   
+                        </button>
+                        <button type="button" class="btn btn-primary next">
+                            Next
+                       
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+}
+@section AboveStyles
+{
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+
+}
+@section ScriptsHead
+{
+
+    <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link href="~/Content/bootstrap-image-gallery.min.css" rel="stylesheet" />
+    <style>
+        a {
+            color: orange;
+        }
+
+            a:hover {
+                color: lightblue;
+                text-decoration: none;
+            }
+
+        .modal {
+            overflow: auto;
+            color: #333;
+        }
+
+        #links {
+            padding: 25px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+            #links img {
+                padding: 5px;
+            }
+
+        .modal.fade.slide-content.in {
+            background: transparent;
+        }
+    </style>
+}
+@section Scripts
+{
+
+    <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="~/Scripts/bootstrap-image-gallery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            'use strict'; event.preventDefault();
+            blueimp.Gallery($('#blueimp-gallery').data());
+
+        });
+    </script>
+}
