@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <h2 class="text-center" style=""display:inline-block">Manage Wedding Event</h2>
+     <button type="button" class="btn btn-success btn-lg btn-commit" ng-click="SaveChanges()">
+      Save
+    </button>
+</div>
+
+<div class="row manage">
+    <div class="span4">
+        <label>Date</label>
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="date" is-open="opened"  ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+    </div>
+     <div class="span4"></div>
+    <div class="span12">
+        <label>Time</label>
+       <timepicker ng-model="time" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
+    </div>
+ 
+</div>
+<div class="row">
+     <div class="span2">
+       <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Wedding.ShowStory" /> 
+    </div>
+       <div class="span6">
+        <label>Our Story</label>
+          <textarea id="txtOurStory" class="bio" required ng-model="WeddingInfo.Wedding.OurStory" />
+    </div>
+</div>
+<div class="row">
+     <div class="span2">
+       <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Wedding.ShowEvent" /> 
+    </div>
+       <div class="span6">
+        <label>Event Details</label>
+          <textarea id="txtEventDetails" class="bio" required ng-model="WeddingInfo.Wedding.EventDetails" />
+    </div>
+</div>
+<div class="row">
+    <div class="span2">
+         <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Wedding.ShowDirections" /> 
+    </div>
+       <div class="span6">
+        <label>Directions</label>
+          <input type="text" id="txtDirections" class="bio" required ng-model="WeddingInfo.Wedding.Directions" />
+    </div>
+     <div class="span2">
+    </div>
+    <div class="span6">
+        <label>Google map link</label>
+          <input type="url" id="txtGoogleMapsLink" class="bio" required ng-model="WeddingInfo.Wedding.GoogleMapLink" />
+    </div>
+</div>
+<div class="row">
+       
+</div>

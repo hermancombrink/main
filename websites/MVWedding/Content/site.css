@@ -1,0 +1,456 @@
+﻿
+
+/* Theme Colors
+    #FFF white
+    #5A908A blue #97F7F6
+    #E7C992 brown #583F3B
+
+    
+Datum: 24 September 2014
+Tyd 15:00
+Plek: Doxa Deo Moot Kampus, 1245 Ben Swart St
+Aanwysings link: http://www.doxadeo-moot.co.za/AanwysingsKaart.aspx
+    */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.grid-style {
+    border: 1px solid #97F7F6;
+    min-height: 250px;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.user-details {
+    margin-top: 50px;
+}
+
+.gender-text {
+    margin: 0 5px;
+    vertical-align: sub;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Freestyle Script';
+}
+.box h3{
+    margin-top:0px !important;
+}
+a:hover {
+    cursor: pointer;
+}
+
+p {
+    color: #583F3B;
+    line-height: 1.5;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 45px;
+    margin-right: 45px;
+}
+.box
+{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.box.top {
+    background: url("../images/bg-box2-top.png") no-repeat scroll center bottom transparent;
+    max-width: 60%;
+    height: 48px;
+    margin-top: 18px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box.middle {
+    background: url("../images/bg-box2-middle.png") repeat-y scroll center bottom transparent;
+    max-width: 60%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.box.bottom {
+    background: url("../images/bg-box2-bottom.png") no-repeat scroll center bottom transparent;
+    width: 65%;
+    height: 114px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.is-countdown {
+    border: none !important;
+    background-color: #FFF  !important;
+    width: 60%;
+    margin: 0 auto;
+}
+.groombride p
+{
+    text-align:center
+}
+.manage p.input-group, .manage p ul.dropdown-menu {
+        padding-left: 0px;
+         margin-left: 0px;
+}
+.manage input.form-control
+{
+    margin-bottom:0px;
+}
+.guestlist ul
+{
+    margin: 0px 0px 0px 0px;
+}
+.guestlist .label-default
+{
+    min-width:100px;
+}
+.guestlist .text-right .label-default
+{
+    margin-left:15px;
+}
+.guestlist .text-left .label-default
+{
+    margin-right:15px;
+}
+.guestlist .friends li label
+{
+    background: none !important;
+    color:#333333 !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif  !important;
+    font-size: 14px !important;
+    font-weight:normal !important;
+}
+.additem
+{
+border: 1px #999999 solid;
+border-radius: 5px;
+float: left;
+margin: 5px;
+}
+.btn-xs{
+    max-height:26px;
+    line-height:14px;
+}
+.listnone
+{
+    list-style:none;
+}
+li.listnone {
+         padding:10px 0px 22px;
+}
+.gmap{
+    overflow:hidden !important;
+    width:95%; 
+    height:450px; 
+    border:0 none;
+    margin: 0 auto;
+}
+
+
+div.blockUI{
+    opacity: 0.6
+}
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle
+{
+    background-color: #583F3B !important;
+}
+.dropdown-submenu:hover > a, .dropdown-submenu:hover  > a,.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus
+{
+    background-image: none !important;
+    background-color: #97F7F6 !important;
+}
+
+.leftmenu
+{
+    border: 2px solid #583F3B;
+    border-radius: 5px;
+}
+.socialimg{
+    max-height:40px;
+    max-width:40px;
+}
+#back-top {
+	position: fixed;
+	bottom: 30px;
+	margin-left: -150px;
+    right:0;
+     border:none !important;
+}
+
+    #back-top a {
+        width: 108px;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: none !important;
+        color: #bbb;
+        /* transition */
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        -o-transition: 1s;
+        transition: 1s;
+    }
+
+
+/* arrow icon (span tag) */
+    #back-top span {
+        width: 20px;
+        height: 35px;
+        display: block;
+        margin-bottom: 7px;
+        line-height: 36px;
+        /* rounded corners */
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        /* transition */
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        -o-transition: 1s;
+        transition: 1s;
+    }
+.pxs_next
+{
+    display:block;
+    float:right;
+    position:relative !important;
+}
+.pxs_next, .pxs_prev
+{
+    top:170px !important;
+}
+
+@media  (min-width: 382px) {
+  .btn-commit {
+  margin-top: -44px;
+  }
+  .pxs_next, .pxs_prev{
+      display:none;
+  }
+}
+@media (max-width: 767px)
+{
+    .guestlist.groombride .text-left,  .guestlist.groombride .text-right
+    {
+        text-align:center !important;
+    }
+    .guestlist.groombride .bride li, 
+    .guestlist.groombride .groom  li
+    {
+        display:block;
+        width:100%;
+        float:left;
+    }
+    .bride span, .bride label, .groom span, .groom label,  .friends .text-right, .friends .text-right {
+        -moz-box-sizing: border-box !important;
+        -webkit-box-sizing: border-box !important;
+        box-sizing: border-box !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        width: 50% !important;
+        text-align: center !important;
+        display: inline-block !important;
+        float: left !important;
+    }
+    .friendslist div
+    {
+        width:50% !important;
+        display:inline-block;
+        float:left;
+    }
+    .friendslist li label, .friends li span
+    {
+        -moz-box-sizing: border-box !important;
+        -webkit-box-sizing: border-box !important;
+        box-sizing: border-box !important;
+        width:100%;
+        float:left;
+         margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+    /*.guestlist.groombride .text-left li
+    {
+        text-align:left !important;
+        margin-left:33%;
+    }
+    .bride.text-right li span
+    {
+        display:inline-block;
+        min-width:100px;
+    }
+    .friends .text-right, .friends .text-left
+    {
+        display:inline-block;
+        width:49%;
+         float:left;
+    }
+    .friends .text-right li
+    {
+        text-align:right;
+       
+    }
+     .friends .text-left li
+    {
+        text-align:left;
+        margin-left:11px !important;
+        line-height:20px
+    }
+     .family .text-right li label
+     {
+         margin-left:11px !important;
+     }*/
+    
+}
+ #defaultCountdown 
+     {
+        min-width:160px !important;
+     }
+.btn-commit
+{
+    float:right;
+}
+.bio
+{
+    width: 100%;
+}
+/* cross fading between routes with ngView */
+
+.view-container {
+    position: relative;
+}
+
+.view-frame.ng-enter,
+.view-frame.ng-leave {
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.view-frame.ng-enter {
+    -webkit-animation: 1.2s fade-in;
+    -moz-animation: 1.2s fade-in;
+    -o-animation: 1.2s fade-in;
+    animation: 1.2s fade-in;
+    z-index: 100;
+}
+
+.view-frame.ng-leave {
+    -webkit-animation: 1.2s fade-out;
+    -moz-animation: 1.2s fade-out;
+    -o-animation: 1.2s fade-out;
+    animation: 1.2s fade-out;
+    z-index: 99;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+/* in page scrolling */
+/*.staticbg:before {
+content: '';
+display: inline-block;
+vertical-align: middle;
+}
+
+.staticbg {
+background-color: #d1c9d0;
+background-image: url('//media.thing.io/files/513ea759/IMG_6839.JPG');
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;
+background-attachment: fixed;
+text-align: center;
+padding: 100px;
+margin-left: 15px;
+margin-right: -15px;
+}*/
+
+/* bootstrap override */
+
+.navbar-inverse .navbar-inner {
+    background-color: #1b1b1b;
+    background-image: -moz-linear-gradient(top, #97F7F6, #111111);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#97F7F6), to(#FFF));
+    background-image: -webkit-linear-gradient(top, #97F7F6, #FFF);
+    background-image: -o-linear-gradient(top, #97F7F6, #FFF);
+    background-image: linear-gradient(to bottom, #97F7F6, #FFF);
+    background-repeat: repeat-x;
+    border-color: #97F7F6;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#97F7F6', endColorstr='#FFF', GradientType=0);
+}
+
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a
+{
+    color:#583F3B;
+}
+.navbar-inverse .brand {
+    color: #583F3B;
+}

@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <h2 class="text-center" style=""display:inline-block">Manage Bride and Groom</h2>
+     <button type="button" class="btn btn-success btn-lg btn-commit" ng-click="SaveChanges()">
+      Save
+    </button>
+</div>
+<div class="row groombride">
+    <h1 class="text-center">Bride</h1>
+    <div class="span4">
+        <label for="txtBrideName">Name:</label><input id="txtBrideName" type="text" required ng-model="WeddingInfo.Bride.Name" />
+    </div>
+     <div class="span4">
+       <label for="txtBrideSurname">Surname:</label><input id="txtBrideSurname" type="text" required ng-model="WeddingInfo.Bride.Surname" />
+    </div>
+     <div class="span8">
+        <label for="txtBrideBio">Bio:</label><textarea id="txtBrideBio" class="bio" required ng-model="WeddingInfo.Bride.Bio" />
+    </div>
+    <div class="span2">
+       <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Bride.ShowFacebook" /> 
+    </div>
+     <div class="span6">
+       <label for="txtBrideFaceBook">Facebook:</label><input id="txtBrideFaceBook" class="bio" type="url"  ng-model="WeddingInfo.Bride.FacebookLink" />
+    </div>
+     <div class="span2">
+        <label  class="label  bio label-info">Active</label><input type="checkbox" ng-model="WeddingInfo.Bride.ShowTwitter" />
+    </div>
+     <div class="span6">
+       <label for="txtBrideTwitter">Twitter:</label><input  id="txtBrideTwitter" class="bio" type="url"  ng-model="WeddingInfo.Bride.TwitterLink" />
+    </div>
+         <div class="span2">
+        <label  class="label  bio label-info">Active</label><input type="checkbox" ng-model="WeddingInfo.Bride.ShowGooglePlus" />
+    </div>
+     <div class="span6">
+       <label for="txtBrideGoogle">Google+:</label><input  id="txtBrideGoogle" class="bio" type="url"  ng-model="WeddingInfo.Bride.GooglePlus" />
+    </div>
+    <h1 class="text-center">Groom</h1>
+      <div class="span4">
+        <label for="txtGroomName">Name:</label><input id="txtGroomName" type="text" required ng-model="WeddingInfo.Groom.Name" />
+    </div>
+     <div class="span4">
+        <label for="txtGroomSurname">Surname:</label><input id="txtGroomSurname" type="text" required ng-model="WeddingInfo.Groom.Surname" />
+    </div>
+     <div class="span8">
+        <label for="txtGroomBio">Bio:</label><textarea id="txtGroomBio" class="bio" required ng-model="WeddingInfo.Groom.Bio" />
+    </div>
+       <div class="span2">
+       <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Groom.ShowFacebook" /> 
+    </div>
+     <div class="span6">
+        <label for="txtGroomFaceBook">Facebook:</label><input id="txtGroomFaceBook" class="bio" type="url"  ng-model="WeddingInfo.Groom.FacebookLink" />
+    </div>
+       <div class="span2">
+       <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Groom.ShowTwitter" /> 
+    </div>
+     <div class="span6">
+        <label for="txtGroomTwitter">Twitter:</label><input  id="txtGroomTwitter" class="bio" type="url"  ng-model="WeddingInfo.Groom.TwitterLink" />
+    </div>
+           <div class="span2">
+       <label class="label bio label-info">Active</label> <input type="checkbox" ng-model="WeddingInfo.Groom.ShowGooglePlus" /> 
+    </div>
+     <div class="span6">
+        <label for="txtGroomGoogle">Google+:</label><input  id="txtGroomGoogle" class="bio" type="url"  ng-model="WeddingInfo.Groom.GooglePlus" />
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@model DbLogic.POCO.WeddingSummary
+
+
+@section Menu
+{
+    <ul class="nav">
+        <li><a onclick="goToByScroll('date')">Date</a></li>
+        @if (Model.Wedding.ShowStory)
+        {
+            <li><a onclick="goToByScroll('story')">Our Story</a></li>
+        }
+        @if (Model.Wedding.ShowEvent)
+        {
+            <li><a onclick="goToByScroll('event')">Event</a></li>
+        }
+        @if(Model.Wedding.ShowDirections)
+        {
+        <li><a onclick="goToByScroll('directions')">Getting There</a></li>
+        }
+        <li><a href="#/home/guestbook">Guest Book</a></li>
+        @Html.Partial("_LoginPartial")
+    </ul>
+}
+<!--This is where the main views would get loaded for SPA
+    This page is the container page for all sub views that get loaded.
+    The sub views that would get loaded into ng-view would not inherit the master page, 
+    and hence would only send relevant html fargments to render specific views.-->
+<div class="view-container">
+    <div ng-view class="view-frame"></div>
+</div>
+
+

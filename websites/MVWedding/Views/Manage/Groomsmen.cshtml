@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <h2 class="text-center" style=""display:inline-block">Manage Groomsmen </h2>
+     <button type="button" class="btn btn-success btn-lg btn-commit" ng-click="SaveChanges()">
+      Save
+    </button>
+</div> 
+<div class="row">
+       <div class="span4">
+        <h3>
+            Current Groomsmen
+        </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="span8 additem">
+        <ul>
+            <li ng-repeat="item in Groomsmen" class="listnone">
+                
+                <div class="span2">{{$index + 1}}. {{item.PersonType.PersonTypeDesc}}</div>
+                <div class="span2">{{item.Name}}  {{item.Surname}}</div>
+                <div class="span1">{{item.GuestCount}}</div>
+                <div class="span1"><button class="btn btn-primary btn-xs" ng-click="UpdateItem(item)">select</button></div>
+                <div class="span1"><button class="btn btn-danger btn-xs" ng-click="RemoveItem(item)">remove</button></div>
+            </li>
+        </ul>
+   </div>
+</div>
+<div class="row">
+    <div class="span8 additem">
+    <div class="span3">
+        <label>Name</label><input type="text" required ng-model="CurrentGroomsman.Name" />
+    </div>
+      <div class="span3">
+        <label>Surname</label><input type="text" required ng-model="CurrentGroomsman.Surname" />
+    </div>
+                    <div class="span3" ng-show="GuestCount > 1">
+        <label>+1 Name</label><input type="text" required ng-model="CurrentGroomsman.FirstGuestName" />
+    </div>
+      <div class="span3" ng-show="GuestCount > 1">
+        <label>+1 Surname</label><input type="text" required ng-model="CurrentGroomsman.FirstGuestSurname" />
+    </div>
+   <div class="span3">
+        <label>Email</label><input type="email"  ng-model="CurrentGroomsman.Email" />
+    </div>
+      <div class="span3">
+        <label>Cell #</label><input type="text"  ng-model="CurrentGroomsman.Cellphone" />
+    </div>
+    <div class="span3">
+        <label>Amount of Guests</label>
+      <input type="number"  ng-model="GuestCount" />
+    </div>
+        <div class="span3">
+        <label>Type</label>
+         <select ng-required ng-model="CurrentGroomsman.PersonType" ng-options="PersonType.PersonTypeDesc for PersonType in PersonTypes track by PersonType.ID">
+             <option value="">-- select type --</option>
+           </select>
+        </div>
+   </div>
+</div>
+<div class="row"  ng-show="isUpdate === false">
+    <div class="span8">
+        <button type="button" class="btn btn-success btn-lg pull-right" ng-click="AddPerson()">Add</button>
+    </div>
+</div>
+<div class="row"  ng-show="isUpdate === true">
+    <div class="span8">
+        <button type="button" class="btn btn-success btn-lg pull-right" ng-click="AddPerson()" style="margin-left:10px;">Update</button>
+         &nbsp;<button type="button" class="btn btn-success btn-lg pull-right" ng-click="Reset()">Reset</button>&nbsp;
+    </div>
+</div>

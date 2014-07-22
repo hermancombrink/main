@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="Manage"  description="Customize my wedding">
+    <siteMapNode url="Wedding" title="Wedding"  description="" />
+    <siteMapNode url="BrideGroom" title="Bride and Groom"  description="" />
+    <siteMapNode url="BridesMaids" title="Bridesmaids"  description="" />
+    <siteMapNode url="GroomsMen" title="Groomsmen"  description="" />
+    <siteMapNode url="Guests" title="Guests"  description="" />
+    <!--<siteMapNode url="Photos" title="Photos"  description="" />
+    <siteMapNode url="SaveDate" title="Save the Date"  description="" />
+    <siteMapNode url="CheckList" title="Wedding Check List"  description="" />-->
+  </siteMapNode>
+</siteMap>

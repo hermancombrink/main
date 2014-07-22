@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <title>Vicki & Marius Wedding</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/parallaxslide/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/parallaxslide/cufon-yui.js" type="text/javascript"></script>
+    <script src="~/Scripts/parallaxslide/ChunkFive_400.font.js" type="text/javascript"></script>
+    <link href="~/Content/countdown/jquery.countdown.css" rel="stylesheet" />
+    <script type="text/javascript">
+        Cufon.replace('h1', { textShadow: '1px 1px #000' });
+        Cufon.replace('h2', { textShadow: '1px 1px #000' });
+        Cufon.replace('.footer', { textShadow: '1px 1px #000' });
+        Cufon.replace('.pxs_loading', { textShadow: '1px 1px #000' });
+    </script>
+</head>
+<body data-ng-app="main" data-ng-controller="RootController">
+    <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+    <div id="top"></div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                @Html.ActionLink("Vicki & Marius Wedding", "Index", "Home", null, new { Class = "brand" })
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @if (User.Identity.IsAuthenticated)
+            {
+                    <div class="span2">
+                <ul class="nav nav-pills nav-stacked navbar-inverse">
+                    <li>
+                        <a class="label label-default" href="#/Wedding">Wedding</a>
+                    </li>
+                    <li class="ng-scope">
+                        <a class="label label-default" href="#/BrideGroom">Bride and Groom</a>
+                    </li>
+                    <li class="ng-scope">
+                        <a class="label label-default" href="#/BridesMaids">Bridesmaids</a>
+                    </li>
+                    <li>
+                        <a class="label label-default" href="#/GroomsMen">Groomsmen</a>
+                    </li>
+                    <li>
+                        <a class="label label-default" href="#/Guests">Guests</a>
+                    </li>
+@*                    <li>
+                        <a class="label label-default" href="#/Photos">Photos</a>
+                    </li>
+                    <li>
+                        <a class="label label-default"href="#/SaveDate">Save the Date</a>
+                    </li>
+                    <li>
+                        <a class="label label-default" href="#/CheckList">Wedding Check List</a>
+                    </li>*@
+                </ul>
+            </div>
+            }
+            else
+            {
+                <div class="span4"></div>
+            }
+            @RenderBody()
+            <div class="span2"></div>
+        </div>
+    </div>
+    <div id="smallModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm ">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                    <h4 class="modal-title" id="myModalLabel" ng-bind="MTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    {{MBody}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paddbottom"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+        <div class="navbar-inner">
+            <div class="container">
+            </div>
+        </div>
+    </nav>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.easing.1.3.js"></script>
+    <style>
+        body {
+            padding-bottom: 0px;
+        }
+
+        .navbar:not(.navbar-fixed-top) {
+            margin-bottom: 0px;
+        }
+
+        .paddbottom {
+            padding: 40px;
+            display: block;
+        }
+    </style>
+</body>
+</html>

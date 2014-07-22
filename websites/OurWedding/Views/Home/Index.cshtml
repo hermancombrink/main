@@ -1,0 +1,19 @@
+﻿@section top_menu
+{
+    <ul class="nav navbar-nav">
+        <li><a href="#/home/date">Date</a></li>
+        <li><a href="#/home/ourstory">Our Story</a></li>
+        <li><a href="#/home/event">Event</a></li>
+        <li><a href="#/home/gettingthere">Getting There</a></li>
+        <li><a href="#/home/rsvp">RSVP</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       @Html.Partial("_LoginPartial")
+      </ul>
+}
+<div class="view-container">
+    <div class="contentclose">
+        <img src="~/Content/birds/birds-xs.png" class="birds"/>
+        <span class="btn btn-xs  glyphicon glyphicon-remove" data-ng-click="toggleFade()"></span></div>
+    <div data-ng-view="" class="view-frame"></div>
+</div>

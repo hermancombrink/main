@@ -1,0 +1,109 @@
+﻿/*
+    #727272 gray
+    #25003A purple
+    #FFF white
+    */
+@font-face {
+  font-family: 'Monotype Corsiva';
+  src: url('bootstrap/fonts/MTCORSVA.eot');
+  src: url('bootstrap/fonts/MTCORSVA.eot?#iefix') format('embedded-opentype'), url('bootstrap/fonts/MTCORSVA.woff') format('woff'), url('bootstrap/fonts/MTCORSVA.ttf') format('truetype'), url('bootstrap/fonts/MTCORSVA.svg#MTCORSVA') format('svg');
+}
+
+body
+{
+    background-color: #727272 !important;
+}
+.container
+{
+    color: #727272;
+    margin: 0 auto !important;
+    padding-top:100px;
+    text-align: center;
+    width: 75%;
+}
+#back-top
+{
+    height: 50px;
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+}
+.view-container{
+    background: none repeat scroll 0 0 #727272;
+    border-radius: 15px;
+    opacity: 0.8;
+}
+.navbar-inverse{
+    background-image: linear-gradient(to bottom, #FFF 0%, #727272 100%) !important;
+    background-repeat: repeat-x;
+    opacity:0.8 !important;
+}
+ #controls{
+  background-image: linear-gradient(to bottom, #727272 0%, #FFF 100%) !important;
+    background-repeat: repeat-x;
+    opacity:0.3 !important;
+ }
+
+.navbar-header a, .navbar-collapse a, #slidecaption, h1, h2, h3, h4, h5
+{
+    color: #25003A !important;
+    font-family: 'Monotype Corsiva', 'Apple Chancery', 'ITC Zapf Chancery', 'URW Chancery L', cursive !important;
+   
+}
+.view-frame
+{
+    color:#FFF;
+}
+.navbar-header a
+{
+ font-size:30px;
+ font-weight:bold;
+}
+.navbar-collapse a
+{
+    font-size:23px;
+}
+ #slidecaption
+{
+    font-size:16px;
+}
+ .manage span
+ {
+     font-size:14px;
+ }
+ .contentclose{
+     height:25px;
+     display:block;
+     border-bottom:1px #FFF solid;
+ }
+ .contentclose span
+ {
+     color:#FFF;
+     float:right;
+     padding:5px;
+     cursor:pointer;
+ }
+ .navbar-brand
+ {
+     cursor:pointer;
+ }
+ .siteloading
+ {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 99999;
+    background: black;
+
+ }
+ .siteloading div
+ {
+     margin: 0 auto !important;text-align:center;top:40%;color:#fff;display:block;position:relative;
+ }
+ .birds
+ {
+     padding:0px;
+     padding-left:27px;
+     height:21px;
+ }

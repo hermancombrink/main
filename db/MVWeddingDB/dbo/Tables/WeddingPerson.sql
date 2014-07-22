@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[WeddingPerson] (
+    [ID]                INT           IDENTITY (1, 1) NOT NULL,
+    [Name]              VARCHAR (200) NULL,
+    [Surname]           VARCHAR (200) NULL,
+    [FacebookLink]      VARCHAR (MAX) NULL,
+    [TwiiterLink]       VARCHAR (MAX) NULL,
+    [DateCreated]       DATETIME      CONSTRAINT [DF_WeddingPerson_DateCreated] DEFAULT (getdate()) NOT NULL,
+    [DateModified]      DATETIME      CONSTRAINT [DF_WeddingPerson_DateModified] DEFAULT (getdate()) NOT NULL,
+    [DateOfBirth]       DATE          NULL,
+    [PersonTypeId]      INT           NULL,
+    [Bio]               VARCHAR (MAX) NULL,
+    [WeddingID]         INT           NULL,
+    [ShowFacebook]      BIT           CONSTRAINT [DF_WeddingPerson_ShowFacebook] DEFAULT ((0)) NOT NULL,
+    [ShowTwitter]       BIT           CONSTRAINT [DF_WeddingPerson_ShowTwitter] DEFAULT ((0)) NOT NULL,
+    [PartnerId]         INT           NULL,
+    [Email]             VARCHAR (200) NULL,
+    [Cellphone]         VARCHAR (50)  NULL,
+    [GooglePlus]        VARCHAR (MAX) NULL,
+    [ShowGooglePlus]    BIT           CONSTRAINT [DF_WeddingPerson_ShowGooglePlus] DEFAULT ((0)) NOT NULL,
+    [GuestCount]        INT           CONSTRAINT [DF_WeddingPerson_GuestCount] DEFAULT ((1)) NOT NULL,
+    [FirstGuestName]    VARCHAR (200) NULL,
+    [FirstGuestSurname] VARCHAR (200) NULL,
+    CONSTRAINT [PK_WeddingPerson] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_WeddingPerson_PersonType] FOREIGN KEY ([PersonTypeId]) REFERENCES [dbo].[PersonType] ([ID]),
+    CONSTRAINT [FK_WeddingPerson_Wedding] FOREIGN KEY ([WeddingID]) REFERENCES [dbo].[Wedding] ([ID]),
+    CONSTRAINT [FK_WeddingPerson_WeddingPerson] FOREIGN KEY ([PartnerId]) REFERENCES [dbo].[WeddingPerson] ([ID])
+);
+

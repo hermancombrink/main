@@ -1,0 +1,290 @@
+﻿@model DbLogic.POCO.WeddingGuestList
+@{
+    Layout = null;
+}
+
+
+<h1 class="text-center" id="guestbook">The Guestbook</h1>
+
+<div class="row groombride guestlist text-center">
+    <div class="span6 text-right bride">
+        <h1>Bride</h1>
+        <h3>Bridesmaids</h3>
+        <ul class="listnone">
+            @if (Model.MaidOfHonour != null && Model.MaidOfHonour.Count > 0)
+            {
+                foreach (var item in Model.MaidOfHonour)
+                {
+            
+                <li>
+
+                  <span>  @(item.Name + " " + @item.Surname)</span>
+                    <label class="label label-default">@item.PersonType.PersonTypeDesc</label></li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+
+                   <span> @item.FirstGuestName @item.FirstGuestSurname</span>
+                    <label class="label label-default">Guest</label></li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+
+                   <span> @item.GuestCount.ToString()</span>
+                    <label class="label label-default">Guest Count</label></li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+
+            @if (Model.Bridesmaids != null && Model.Bridesmaids.Count > 0)
+            {
+                foreach (var item in Model.Bridesmaids)
+                {
+            
+                <li>
+
+                   <span> @(item.Name + " " + @item.Surname)</span><label class="label label-default">@item.PersonType.PersonTypeDesc</label></li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+
+                  <span>  @item.FirstGuestName @item.FirstGuestSurname</span>
+                    <label class="label label-default">Guest</label></li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+
+                   <span> @item.GuestCount.ToString()</span>
+                    <label class="label label-default">Guest Count</label></li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="span6 text-left groom">
+        <h1>Groom</h1>
+        <h3>Best men</h3>
+        <ul class="listnone">
+            @if (Model.BestMen != null && Model.BestMen.Count > 0)
+            {
+                foreach (var item in Model.BestMen)
+                {
+            
+                <li>
+                    <label class="label label-default">@item.PersonType.PersonTypeDesc</label>
+                     <span>@(item.Name + " " + @item.Surname)</span></li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+                    <label class="label label-default">Guest</label>
+                    <span> @item.FirstGuestName @item.FirstGuestSurname</span></li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+                    <label class="label label-default">Guest Count</label>
+                   <span> @item.GuestCount.ToString() </span></li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+            @if (Model.Groomsmen != null && Model.Groomsmen.Count > 0)
+            {
+                foreach (var item in Model.Groomsmen)
+                {
+            
+                <li>
+                    <label class="label label-default">@item.PersonType.PersonTypeDesc</label>
+                   <span> @(item.Name + " " + @item.Surname) </span></li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+                    <label class="label label-default">Guest</label>
+                    <span>@item.FirstGuestName @item.FirstGuestSurname </span></li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+                    <label class="label label-default">Guest Count</label>
+                    <span> @item.GuestCount.ToString() </span></li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+        </ul>
+    </div>
+
+</div>
+<div class="row groombride guestlist text-center family">
+    <h3>Family</h3>
+    <div class="span6 text-right bride">
+        <ul class="listnone">
+            @if (Model.BridesParents != null && Model.BridesParents.Count > 0)
+            {
+                foreach (var item in Model.BridesParents)
+                {
+            
+                <li>
+
+                    <span>@(item.Name + " " + @item.Surname)</span>
+                    <label class="label label-default">@item.PersonType.PersonTypeDesc</label></li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+
+                    <span> @item.FirstGuestName @item.FirstGuestSurname</span>
+                    <label class="label label-default">Guest</label></li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+
+                   <span> @item.GuestCount.ToString()</span>
+                    <label class="label label-default">Guest Count</label></li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+
+            @if (Model.BridesFamily != null && Model.BridesFamily.Count > 0)
+            {
+                foreach (var item in Model.BridesFamily)
+                {
+            
+                <li>
+
+                    <span> @(item.Name + " " + @item.Surname)</span><label class="label label-default">@item.PersonType.PersonTypeDesc</label></li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+
+                   <span> @item.FirstGuestName @item.FirstGuestSurname</span>
+                    <label class="label label-default">Guest</label></li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+
+                   <span> @item.GuestCount.ToString()</span>
+                    <label class="label label-default">Guest Count</label></li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="span6 text-left groom">
+        <ul class="listnone">
+            @if (Model.GroomsParents != null && Model.GroomsParents.Count > 0)
+            {
+                foreach (var item in Model.GroomsParents)
+                {
+            
+                <li>
+                    <label class="label label-default">@item.PersonType.PersonTypeDesc</label>
+                    @(item.Name + " " + @item.Surname)</li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+                    <label class="label label-default">Guest</label>
+                    @item.FirstGuestName @item.FirstGuestSurname</li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+                    <label class="label label-default">Guest Count</label>
+                    @item.GuestCount.ToString() </li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+            @if (Model.GroomsFamily != null && Model.GroomsFamily.Count > 0)
+            {
+                foreach (var item in Model.GroomsFamily)
+                {
+            
+                <li>
+                    <label class="label label-default">@item.PersonType.PersonTypeDesc</label>
+                    @(item.Name + " " + @item.Surname)</li>
+                    if (item.GuestCount > 1)
+                    { 
+                <li>
+                    <label class="label label-default">Guest</label>
+                    @item.FirstGuestName @item.FirstGuestSurname</li>
+                    }
+                    if (item.GuestCount > 2)
+                    {
+                <li>
+                    <label class="label label-default">Guest Count</label>
+                    @item.GuestCount.ToString() </li>
+                    }
+                <li>&nbsp;</li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="row groombride guestlist text-center friendslist">
+        <h3>Friends</h3>
+        <div class="span6 text-right">
+            <ul class="listnone">
+                @if (Model.Friends != null && Model.Friends.Count > 0)
+                {
+                    foreach (var item in Model.Friends)
+                    {
+            
+                    <li>
+                        <label class="label label-default">@item.PersonType.PersonTypeDesc</label>
+                        </li>
+                        if (item.GuestCount > 1)
+                        { 
+                    <li>
+                        <label class="label label-default">Guest</label>
+                       </li>
+                        }
+                        if (item.GuestCount > 2)
+                        {
+                    <li>
+                        <label class="label label-default">Guest Count</label>
+                       </li>
+                        }
+                    <li>&nbsp;</li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="span6 text-left">
+            <ul class="listnone friends">
+                @if (Model.Friends != null && Model.Friends.Count > 0)
+                {
+                    foreach (var item in Model.Friends)
+                    {
+            
+                    <li>
+                       
+                        <label class="label label-default">   @(item.Name + " " + @item.Surname)</label></li>
+                        if (item.GuestCount > 1)
+                        { 
+                    <li>
+                 
+                       <label class="label label-default"> @item.FirstGuestName @item.FirstGuestSurname &nbsp;</label></li>
+                        }
+                       
+                        if (item.GuestCount > 2)
+                        {
+                    <li>
+                       
+                      <label class="label label-default">  @item.GuestCount.ToString() </label></li>
+                        }
+                    <li>&nbsp;</li>
+                    }
+                }
+            </ul>
+        </div>
+
+</div>
+

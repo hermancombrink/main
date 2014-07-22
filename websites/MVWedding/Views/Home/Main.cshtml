@@ -1,0 +1,134 @@
+﻿@model DbLogic.POCO.WeddingSummary
+@{
+    Layout = null;
+}
+<div class="row groombride">
+    <div class="span6">
+        <h1 class="text-center">Bride</h1>
+        <h2 class="text-center">@Model.Bride.Name @Model.Bride.Surname</h2>
+        <div>
+            <p class="center-text">@Model.Bride.Bio</p>
+        </div>
+        <div class="row text-center">
+            <div class="span6">
+                 @if(Model.Bride.ShowFacebook){
+                     <a href="@Model.Bride.FacebookLink" target="_blank"><img class="socialimg" src="../../Content/images/Facebook-icon.png" alt="" /></a>
+                 }
+                  @if(Model.Bride.ShowGooglePlus){
+                  <a href="@Model.Bride.GooglePlus" target="_blank"><img  class="socialimg" src="../../Content/images/GooglePlus-icon.png" alt="" /></a>
+                  }
+                  @if(Model.Bride.ShowTwitter){
+                  <a href="@Model.Bride.TwiiterLink" target="_blank"><img class="socialimg" src="../../Content/images/Twitter-icon.png" alt="" /></a>
+                  }
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <h1 class="text-center">Groom</h1>
+        <h2 class="text-center">@Model.Groom.Name @Model.Groom.Surname</h2>
+        <div>
+            <p class="center-text">@Model.Groom.Bio</p>
+        </div>
+        <div class="row text-center">
+            <div class="span6">
+                  @if(Model.Groom.ShowFacebook){
+                 <a href="@Model.Groom.FacebookLink" target="_blank"><img class="socialimg" src="../../Content/images/Facebook-icon.png" alt="" /></a>
+                  }
+                  @if (Model.Groom.ShowGooglePlus)
+                  {
+                  <a href="@Model.Groom.GooglePlus" target="_blank"><img class="socialimg" src="../../Content/images/GooglePlus-icon.png" alt="" /></a>
+                  }
+                  @if (Model.Groom.ShowTwitter)
+                  {
+                  <a href="@Model.Groom.TwiiterLink" target="_blank"><img class="socialimg" src="../../Content/images/Twitter-icon.png" alt="" /></a>
+                  }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <h1 class="text-center" id="date">Date</h1>
+    <div class="box top">
+    </div>
+    <div class="box middle">
+
+        <h3>@if (Model.Wedding.WeddingDate.HasValue)
+            {
+            @Model.Wedding.WeddingDate.Value.ToShortDateString();
+            }
+        </h3>
+        <h4>@if (Model.Wedding.WeddingDate.HasValue)
+            {
+            @Model.Wedding.WeddingDate.Value.ToShortTimeString();
+            }</h4>
+        <br />
+        <h2 id="cntdate"></h2>
+        <div id="defaultCountdown"></div>
+    </div>
+    <div class="box bottom">
+    </div>
+</div>
+@if (Model.Wedding.ShowStory)
+{
+    <div class="row">
+
+        <h1 class="text-center" id="story">Our Story</h1>
+        <div class="box top">
+        </div>
+        <div class="box middle">
+            <p>@Model.Wedding.OurStory</p>
+        </div>
+        <div class="box bottom">
+        </div>
+    </div>
+}
+@if (Model.Wedding.ShowEvent)
+{
+    <div class="row">
+        <h1 class="text-center" id="event">Event</h1>
+        <div class="box top">
+        </div>
+        <div class="box middle">
+            <p>@Model.Wedding.EventDetails</p>
+        </div>
+        <div class="box bottom">
+        </div>
+    </div>
+}
+@if (Model.Wedding.ShowDirections)
+{
+    <div class="row">
+        <h1 class="text-center" id="directions">Getting There</h1>
+        <div class="box top">
+        </div>
+        <div class="box middle gmapblock">
+            <h3>@Model.Wedding.Directions</h3>
+            <div class="gmap">
+                <iframe src="@Model.Wedding.GoogleMapLink" class="gmap"></iframe>
+            </div>
+        </div>
+        <div class="box bottom">
+        </div>
+    </div>
+}
+@if (Model.Wedding.WeddingDate.HasValue)
+{
+    <script>
+        var y = "@Html.Raw(Model.Wedding.WeddingDate.Value.Year)";
+        var m = "@Html.Raw(Model.Wedding.WeddingDate.Value.Month - 1)";
+        var d = "@Html.Raw(Model.Wedding.WeddingDate.Value.Day)";
+        var h = "@Html.Raw(Model.Wedding.WeddingDate.Value.Hour)";
+        var mm = "@Html.Raw(Model.Wedding.WeddingDate.Value.Minute)";
+        //note month 8 js notation, not 7
+        var austDay = new Date(y, m, d, 15, mm, 0, 00);
+        if (austDay > new Date()) {
+            $("#cntdate").text("Countdown until our big day");
+            $('#defaultCountdown').countdown({ until: austDay });
+        }
+        else {
+            $("#cntdate").text("Happily married for...");
+            $('#defaultCountdown').countdown({ since: austDay });
+        }
+    </script>
+}
