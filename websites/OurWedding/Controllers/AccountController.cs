@@ -8,10 +8,10 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using OurWedding.Filters;
-using OurWedding.Models;
+using alieziaherman.co.za.Filters;
+using alieziaherman.co.za.Models;
 
-namespace OurWedding.Controllers
+namespace alieziaherman.co.za.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]

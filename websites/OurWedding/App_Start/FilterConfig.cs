@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace OurWedding
+namespace alieziaherman.co.za
 {
     public class FilterConfig
     {

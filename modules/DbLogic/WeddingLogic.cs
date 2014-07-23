@@ -15,7 +15,7 @@ namespace DbLogic
         Groomsmen,
         Guest
     }
-    public class WeddingLogic
+    public class WeddingLogic : IWeddingLogic
     {
         private const string TAG = "WeddingLogic";
         DbLogic.WeddingContext _dbContext;

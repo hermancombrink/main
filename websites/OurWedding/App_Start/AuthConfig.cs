@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using OurWedding.Models;
+using alieziaherman.co.za.Models;
 
-namespace OurWedding
+namespace alieziaherman.co.za
 {
     public static class AuthConfig
     {
