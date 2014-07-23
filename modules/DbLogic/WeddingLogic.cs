@@ -263,12 +263,12 @@ namespace DbLogic
             var list = query.ToList();
             foreach (var item in list)
             {
-                var foundExisting = false;
+               // var foundExisting = false;
                 foreach (var updateItem in weddingPersons)
                 {
                     if (item.ID == updateItem.ID)
                     {
-                        foundExisting = true;
+                       // foundExisting = true;
                         item.Name = updateItem.Name;
                         item.Surname = updateItem.Surname;
                         item.Email = updateItem.Email;
@@ -281,10 +281,10 @@ namespace DbLogic
                     }
                 }
 
-                if (!foundExisting) //delete existing item
-                {
-                    _dbContext.WeddingPersons.Remove(item);
-                }
+                //if (!foundExisting) //delete existing item
+                //{
+                //    _dbContext.WeddingPersons.Remove(item);
+                //}
             }
             foreach (var updateItem in weddingPersons)
             {
@@ -319,6 +319,19 @@ namespace DbLogic
         public List<WeddingPhoto> GetWeddingPhotos(string domain)
         {
             return _dbContext.WeddingPhotos.Where(c => c.Wedding.Domain.Equals(domain)).ToList();
+        }
+
+        public void DeleteWeddingPerson(WeddingPerson person)
+        {
+            var dbperson = _dbContext.WeddingPersons.FirstOrDefault(c => c.ID.Equals(person.ID));
+            if (dbperson != null)
+            {
+                _dbContext.WeddingPersons.Remove(dbperson);
+                _dbContext.SaveChanges();
+                return;
+            }
+
+            throw new Exception("Person not found in database");
         }
 
     }

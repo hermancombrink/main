@@ -47,6 +47,10 @@ angularStartServices.factory('WebApiServce', ["$http", function ($http) {
         SavePhotos: function (photos)
         {
             return $http.post("/api/ManageApi/SaveGuests", JSON.stringify(photos));
+        },
+        DeletePerson: function (person)
+        {
+            return $http.post("/api/ManageApi/DeletePerson", JSON.stringify(person));
         }
     }
 }]);

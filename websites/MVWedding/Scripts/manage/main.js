@@ -39,6 +39,15 @@ angular.module('main')
                     $scope.$emit("ERROR", { Title: "Content Not Saved", Body: "Oops details could not be saved!" });
                 });
         }
+
+        $scope.DeletePerson = function (person)
+        {
+            WebApiServce.DeletePerson(person).success(function () {
+                $scope.$emit("SUCCESS", { Title: "Person Removed", Body: "Person removed from wedding" });
+            }).error(function () {
+                $scope.$emit("ERROR", { Title: "Content Not Saved", Body: "Oops details could not be saved!" });
+            });
+        }
         $scope.WeddingInfo = "";
         $scope.date = "";
         $scope.time = "";
@@ -84,8 +93,16 @@ angular.module('main')
                 });
         }
         $scope.RemoveItem = function (item) {
+            if (!confirm("Delete?", "Are you sure you want to remove this item")) return;
             var index = $scope.Bridesmaids.indexOf(item);
             $scope.Bridesmaids.splice(index, 1);
+            if(item.ID)
+                WebApiServce.DeletePerson(item).success(function (data) {
+                $scope.$emit("SUCCESS", { Title: "Person Removed", Body: "Person removed from wedding" });
+                }).
+                 error(function () {
+                    $scope.$emit("ERROR", { Title: "Failed to remove", Body: "Oops failed to delete current person!" });
+                 });
         }
         $scope.UpdateItem = function (item) {
             $scope.GuestCount = item.GuestCount;
@@ -168,8 +185,16 @@ angular.module('main')
         }
 
         $scope.RemoveItem = function (item) {
+            if (!confirm("Delete?", "Are you sure you want to remove this item")) return;
             var index = $scope.Groomsmen.indexOf(item);
             $scope.Groomsmen.splice(index, 1);
+            if (item.ID)
+                WebApiServce.DeletePerson(item).success(function (data) {
+                    $scope.$emit("SUCCESS", { Title: "Person Removed", Body: "Person removed from wedding" });
+                }).
+                 error(function () {
+                     $scope.$emit("ERROR", { Title: "Failed to remove", Body: "Oops failed to delete current person!" });
+                 });
         }
         $scope.UpdateItem = function (item) {
             $scope.GuestCount = item.GuestCount;
@@ -250,8 +275,16 @@ angular.module('main')
                 });
         }
         $scope.RemoveItem = function (item) {
+            if (!confirm("Delete?", "Are you sure you want to remove this item")) return;
             var index = $scope.Guests.indexOf(item);
             $scope.Guests.splice(index, 1);
+            if (item.ID)
+                WebApiServce.DeletePerson(item).success(function (data) {
+                    $scope.$emit("SUCCESS", { Title: "Person Removed", Body: "Person removed from wedding" });
+                }).
+                 error(function () {
+                     $scope.$emit("ERROR", { Title: "Failed to remove", Body: "Oops failed to delete current person!" });
+                 });
         }
         $scope.UpdateItem = function (item) {
             $scope.GuestCount = item.GuestCount;

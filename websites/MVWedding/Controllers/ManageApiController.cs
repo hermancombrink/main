@@ -140,7 +140,13 @@ namespace MVWedding.Controllers
             _context.SaveWeddingPersons(guests, _domain, WPersonType.Guest);
         }
 
-
+        [HttpPost]
+        [Authorize]
+        public void DeletePerson(WeddingPerson person)
+        {
+            Init();
+            _context.DeleteWeddingPerson(person);
+        }
       
     }
 }

@@ -103,6 +103,10 @@ p {
 {
     margin-bottom:0px;
 }
+.guestlist 
+{
+    font-size:12px;
+}
 .guestlist ul
 {
     margin: 0px 0px 0px 0px;
@@ -124,9 +128,9 @@ p {
     background: none !important;
     color:#333333 !important;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif  !important;
-    font-size: 14px !important;
     font-weight:normal !important;
 }
+
 .additem
 {
 border: 1px #999999 solid;
