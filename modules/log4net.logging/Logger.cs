@@ -18,6 +18,7 @@ namespace log4net.logging
                     var logname = System.Reflection.Assembly.GetCallingAssembly().FullName;
                     log4net.Config.XmlConfigurator.Configure();
                     _logger = log4net.LogManager.GetLogger(logname);
+                    _logger.Info("Spawning new logger");
                 }
                 return _logger;
             }

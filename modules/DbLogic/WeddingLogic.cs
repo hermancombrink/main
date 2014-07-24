@@ -1,4 +1,5 @@
-﻿using DbLogic.POCO;
+﻿using log4net.logging;
+using DbLogic.POCO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+
+
 
 namespace DbLogic
 {
@@ -24,6 +27,7 @@ namespace DbLogic
             _dbContext = new WeddingContext();
             _dbContext.Configuration.ProxyCreationEnabled = false;
             _dbContext.Configuration.LazyLoadingEnabled = false;
+             Logger.Log.Info("Spawning new db context for weddings");
         }
 
         public WeddingSummary GetWeddingByDomain(string domain)
