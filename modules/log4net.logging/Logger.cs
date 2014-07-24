@@ -7,12 +7,19 @@ using log4net;
 
 namespace log4net.logging
 {
-    public static class Logger
+    public class Logger : log4net.logging.ILogger
     {
-        private static ILog _logger;
-        public static ILog Log
+
+        public Logger()
         {
-            get {
+            log4net.Config.XmlConfigurator.Configure();
+        }
+
+        private ILog _logger;
+        public ILog Log
+        {
+            get
+            {
                 if (_logger == null)
                 {
                     var logname = System.Reflection.Assembly.GetCallingAssembly().FullName;
