@@ -186,6 +186,9 @@
     <Content Include="Packages\WebActivatorEx.2.0.nupkg" />
     <Content Include="Packages\WebGrease.1.1.0.nupkg" />
     <Content Include="Packages\WebGrease.1.3.0.nupkg" />
+    <Content Include="Packages\log4net.2.0.3.nupkg" />
+    <Content Include="Packages\Ninject.Web.Common.3.0.0.7.nupkg" />
+    <Content Include="Packages\WebActivator.1.5.nupkg" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
