@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ginger-aalwyn.co.za", "webs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wedding.logic", "modules\wedding.logic\wedding.logic.csproj", "{9BBB65ED-253D-4CF9-9694-9F2874B866DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "object.mapper", "modules\object.mapper\object.mapper.csproj", "{D16663C3-80F8-47A4-AB84-C6FEBE785957}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{9BBB65ED-253D-4CF9-9694-9F2874B866DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BBB65ED-253D-4CF9-9694-9F2874B866DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BBB65ED-253D-4CF9-9694-9F2874B866DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16663C3-80F8-47A4-AB84-C6FEBE785957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16663C3-80F8-47A4-AB84-C6FEBE785957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16663C3-80F8-47A4-AB84-C6FEBE785957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16663C3-80F8-47A4-AB84-C6FEBE785957}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +79,6 @@ Global
 		{1680F893-4526-4924-90FF-9DAB3174B3A3} = {4C92914D-EB5F-434B-8BBE-1F949D6A07DD}
 		{9B0285C5-4E35-4D13-B4D5-544556354F80} = {18CA23ED-09BA-4D1D-AC4D-DA4BBD979751}
 		{9BBB65ED-253D-4CF9-9694-9F2874B866DC} = {18CA23ED-09BA-4D1D-AC4D-DA4BBD979751}
+		{D16663C3-80F8-47A4-AB84-C6FEBE785957} = {18CA23ED-09BA-4D1D-AC4D-DA4BBD979751}
 	EndGlobalSection
 EndGlobal

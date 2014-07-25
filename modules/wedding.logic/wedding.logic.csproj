@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>wedding.logic</RootNamespace>
     <AssemblyName>wedding.logic</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -122,6 +122,10 @@
     <ProjectReference Include="..\log4net.logging\log4net.logging.csproj">
       <Project>{9b0285c5-4e35-4d13-b4d5-544556354f80}</Project>
       <Name>log4net.logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\object.mapper\object.mapper.csproj">
+      <Project>{d16663c3-80f8-47a4-ab84-c6febe785957}</Project>
+      <Name>object.mapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

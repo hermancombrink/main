@@ -7,8 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-
-
+using obj.mapper;
 
 namespace wedding.logic
 {
@@ -21,14 +20,28 @@ namespace wedding.logic
     public class WeddingLogic : IWeddingLogic
     {
         private const string TAG = "WeddingLogic";
-        wedding.logic.WeddingContext _dbContext;
-        ILogger logger;
+        WeddingContext _dbContext;
+        ILogger _logger;
+        ObjectMap _mapper = new ObjectMap();
         public WeddingLogic(ILogger logger)
         {
             _dbContext = new WeddingContext();
             _dbContext.Configuration.ProxyCreationEnabled = false;
             _dbContext.Configuration.LazyLoadingEnabled = false;
             logger.Log.Info("Spawning new db context for weddings");
+        }
+
+        #region Gets
+        private Wedding GetWedding(string domain)
+        {
+            try
+            {
+                return _dbContext.Weddings.SingleOrDefault(c => c.Domain.Equals(domain));
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding information", TAG);
+            }
         }
 
         public WeddingSummary GetWeddingByDomain(string domain)
@@ -47,9 +60,9 @@ namespace wedding.logic
             }
             catch (Exception ex)
             {
-                throw new Exception("An error has occurred while retrieving your wedding");
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding information", TAG);
             }
-            throw new Exception("Unable to find wedding based on domain");
+            throw _logger.GetRaiseException("Unable to find wedding based on domain", TAG);
         }
 
         public WeddingGuestList GetAllGuests(string domain)
@@ -92,77 +105,119 @@ namespace wedding.logic
             }
             catch (Exception ex)
             {
-                throw new Exception("An error has occurred while retrieving your wedding");
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding information", TAG);
             }
-            throw new Exception("Unable to find wedding based on domain");
+            throw _logger.GetRaiseException("Unable to find wedding based on domain", TAG);
         }
 
         public List<WeddingPerson> GetBridesmaids(string domain)
         {
-            var query = from w in _dbContext.Weddings
-                        join p in _dbContext.WeddingPersons on w.ID equals p.WeddingID
-                        join pt in _dbContext.PersonTypes on p.PersonTypeId equals pt.ID
-                        where w.Domain == domain && pt.PersonTypeDesc == "Maid of Honour" || pt.PersonTypeDesc == "Bridesmaid"
-                        select p;
+            try
+            {
+                var query = from w in _dbContext.Weddings
+                            join p in _dbContext.WeddingPersons on w.ID equals p.WeddingID
+                            join pt in _dbContext.PersonTypes on p.PersonTypeId equals pt.ID
+                            where w.Domain == domain && pt.PersonTypeDesc == "Maid of Honour" || pt.PersonTypeDesc == "Bridesmaid"
+                            select p;
 
-            return query.Include(c => c.PersonType).ToList();
+                return query.Include(c => c.PersonType).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding bridesmaids", TAG);
+            }
         }
 
         public List<WeddingPerson> GetGroomsmen(string domain)
         {
-            var query = from w in _dbContext.Weddings
-                        join p in _dbContext.WeddingPersons on w.ID equals p.WeddingID
-                        join pt in _dbContext.PersonTypes on p.PersonTypeId equals pt.ID
-                        where w.Domain == domain && (pt.PersonTypeDesc == "Groomsman" || pt.PersonTypeDesc == "Best man")
-                        select p;
+            try
+            {
+                var query = from w in _dbContext.Weddings
+                            join p in _dbContext.WeddingPersons on w.ID equals p.WeddingID
+                            join pt in _dbContext.PersonTypes on p.PersonTypeId equals pt.ID
+                            where w.Domain == domain && (pt.PersonTypeDesc == "Groomsman" || pt.PersonTypeDesc == "Best man")
+                            select p;
 
-            return query.Include(c => c.PersonType).ToList();
+                return query.Include(c => c.PersonType).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding groomsmen", TAG);
+            }
         }
 
         public List<WeddingPerson> GetGuests(string domain)
         {
-            var query = from w in _dbContext.Weddings
-                        join c in _dbContext.WeddingPersons on w.ID equals c.WeddingID
-                        where w.Domain == domain && (c.PersonType.PersonTypeDesc != "Groomsman" && c.PersonType.PersonTypeDesc != "Best man" &&
-                                c.PersonType.PersonTypeDesc != "Maid of Honour" && c.PersonType.PersonTypeDesc != "Bridesmaid" &&
-                                c.PersonType.PersonTypeDesc != "Bride" && c.PersonType.PersonTypeDesc != "Groom")
-                        select c;
+            try
+            {
+                var query = from w in _dbContext.Weddings
+                            join c in _dbContext.WeddingPersons on w.ID equals c.WeddingID
+                            where w.Domain == domain && (c.PersonType.PersonTypeDesc != "Groomsman" && c.PersonType.PersonTypeDesc != "Best man" &&
+                                    c.PersonType.PersonTypeDesc != "Maid of Honour" && c.PersonType.PersonTypeDesc != "Bridesmaid" &&
+                                    c.PersonType.PersonTypeDesc != "Bride" && c.PersonType.PersonTypeDesc != "Groom")
+                            select c;
 
-            return query.Include(c => c.PersonType).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToList();
+                return query.Include(c => c.PersonType).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding guest list", TAG);
+            }
         }
 
         public List<PersonType> GetPersonType(WPersonType wType)
         {
-            switch (wType)
+            try
             {
-                case WPersonType.Bridesmaids:
-                    {
-                        var query = from pt in _dbContext.PersonTypes
-                                    where pt.PersonTypeDesc == "Maid of Honour" || pt.PersonTypeDesc == "Bridesmaid"
-                                    select pt;
-                        return query.ToList();
-                    }
-                case WPersonType.Groomsmen:
+                switch (wType)
                 {
-                    var query = from pt in _dbContext.PersonTypes
-                                where pt.PersonTypeDesc == "Groomsman" || pt.PersonTypeDesc == "Best man"
-                                select pt;
-                    return query.ToList();
+                    case WPersonType.Bridesmaids:
+                        {
+                            var query = from pt in _dbContext.PersonTypes
+                                        where pt.PersonTypeDesc == "Maid of Honour" || pt.PersonTypeDesc == "Bridesmaid"
+                                        select pt;
+                            return query.ToList();
+                        }
+                    case WPersonType.Groomsmen:
+                        {
+                            var query = from pt in _dbContext.PersonTypes
+                                        where pt.PersonTypeDesc == "Groomsman" || pt.PersonTypeDesc == "Best man"
+                                        select pt;
+                            return query.ToList();
+                        }
+                    case WPersonType.Guest:
+                        {
+                            var query = from pt in _dbContext.PersonTypes
+                                        where pt.PersonTypeDesc != "Groomsman" && pt.PersonTypeDesc != "Best man"
+                                        && pt.PersonTypeDesc != "Maid of Honour" && pt.PersonTypeDesc != "Bridesmaid"
+                                        && pt.PersonTypeDesc != "Bride" && pt.PersonTypeDesc != "Groom"
+                                        select pt;
+                            return query.OrderBy(c => c.PersonTypeDesc).ToList();
+                        }
+                    default:
+                        throw new Exception("No person type has been passed");
                 }
-                case WPersonType.Guest:
-                {
-                    var query = from pt in _dbContext.PersonTypes
-                                where pt.PersonTypeDesc != "Groomsman" && pt.PersonTypeDesc != "Best man" 
-                                && pt.PersonTypeDesc != "Maid of Honour" && pt.PersonTypeDesc != "Bridesmaid"
-                                && pt.PersonTypeDesc != "Bride" && pt.PersonTypeDesc != "Groom"
-                                select pt;
-                    return query.OrderBy(c=> c.PersonTypeDesc).ToList();
-                }
-                default:
-                     throw new Exception("No person type has been passed");
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding person types", TAG);
             }
         }
 
+        public List<WeddingPhoto> GetWeddingPhotos(string domain)
+        {
+            try
+            {
+                return _dbContext.WeddingPhotos.Where(c => c.Wedding.Domain.Equals(domain)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unexpected error has occurred while getting the wedding photos", TAG);
+            }
+        }
+        #endregion
+
+        #region CustomSaves
         public void SaveBrideGroomInfo(string domain, WeddingSummary brideGroomInfo)
         {
             try
@@ -202,23 +257,14 @@ namespace wedding.logic
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.Message, TAG);
-                //throw safe exception
-                throw new Exception("Failed to save bride and groom information");
+                _logger.SafeException(ex, "Unexpected error occurred while saving the bride and groom information", TAG);
             }
-        }
-
-        private Wedding GetWedding(string domain)
-        {
-            return _dbContext.Weddings.SingleOrDefault(c => c.Domain.Equals(domain));
         }
 
         public void SaveWeddingInfo(string _domain, WeddingSummary weddingSummary)
         {
             try
             {
-                Trace.WriteLine("Running SaveWeddingInfo...", TAG);
-                Trace.WriteLine("Getting wedding info", TAG);
                 var Wedding = GetWedding(_domain);
                 Wedding.DateModified = DateTime.Now;
                 Wedding.GoogleMapLink = weddingSummary.Wedding.GoogleMapLink;
@@ -229,115 +275,172 @@ namespace wedding.logic
                 Wedding.ShowEvent = weddingSummary.Wedding.ShowEvent;
                 Wedding.ShowStory = weddingSummary.Wedding.ShowStory;
                 Wedding.ShowDirections = weddingSummary.Wedding.ShowDirections;
-                Trace.WriteLine("Trying to update info", TAG);
                 _dbContext.SaveChanges();
-                Trace.WriteLine("Change committed", TAG);
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.Message, TAG);
-                //throw safe exception
-                throw new Exception("Failed to save bride and groom information");
+                _logger.SafeException(ex, "Unexpected error occurred while saving the wedding information", TAG);
             }
         }
 
         public void SaveWeddingPersons(List<WeddingPerson> weddingPersons, string domain, WPersonType personType)
         {
-            if (string.IsNullOrEmpty(domain))
-                throw new Exception("Invalid domain passed");
-            var wedding = GetWedding(domain);
-            var query = from w in _dbContext.Weddings
-                        join p in _dbContext.WeddingPersons on w.ID equals p.WeddingID
-                        join pt in _dbContext.PersonTypes on p.PersonTypeId equals pt.ID
-                        select p;
-
-            switch (personType) 
+            try
             {
-                case WPersonType.Bridesmaids:
-                      query = query.Where(c => c.PersonType.PersonTypeDesc == "Maid of Honour" || c.PersonType.PersonTypeDesc == "Bridesmaid"); break;
-                case WPersonType.Groomsmen:
-                    query = query.Where(c => c.PersonType.PersonTypeDesc == "Groomsman" || c.PersonType.PersonTypeDesc == "Best man");break;
-                case WPersonType.Guest:
-                    query = query.Where(c =>  c.PersonType.PersonTypeDesc != "Groomsman" && c.PersonType.PersonTypeDesc != "Best man" &&
-                                c.PersonType.PersonTypeDesc != "Maid of Honour" && c.PersonType.PersonTypeDesc != "Bridesmaid" &&
-                                c.PersonType.PersonTypeDesc != "Bride" && c.PersonType.PersonTypeDesc != "Groom");break;
-                default:
-                    break;
-            }
+                if (string.IsNullOrEmpty(domain))
+                    _logger.RaiseException("No wedding has been passed for saving these people", TAG);
+                var wedding = GetWedding(domain);
+                var query = from w in _dbContext.Weddings
+                            join p in _dbContext.WeddingPersons on w.ID equals p.WeddingID
+                            join pt in _dbContext.PersonTypes on p.PersonTypeId equals pt.ID
+                            select p;
 
-            var list = query.ToList();
-            foreach (var item in list)
-            {
-               // var foundExisting = false;
-                foreach (var updateItem in weddingPersons)
+                switch (personType)
                 {
-                    if (item.ID == updateItem.ID)
-                    {
-                       // foundExisting = true;
-                        item.Name = updateItem.Name;
-                        item.Surname = updateItem.Surname;
-                        item.Email = updateItem.Email;
-                        item.Cellphone = updateItem.Cellphone;
-                        item.GuestCount = updateItem.GuestCount;
-                        item.PersonTypeId = updateItem.PersonType != null ? updateItem.PersonType.ID : updateItem.PersonTypeId;
-                        item.FirstGuestName = updateItem.FirstGuestName;
-                        item.FirstGuestSurname = updateItem.FirstGuestSurname;
-                        item.DateModified = DateTime.Now;
-                    }
+                    case WPersonType.Bridesmaids:
+                        query = query.Where(c => c.PersonType.PersonTypeDesc == "Maid of Honour" || c.PersonType.PersonTypeDesc == "Bridesmaid"); break;
+                    case WPersonType.Groomsmen:
+                        query = query.Where(c => c.PersonType.PersonTypeDesc == "Groomsman" || c.PersonType.PersonTypeDesc == "Best man"); break;
+                    case WPersonType.Guest:
+                        query = query.Where(c => c.PersonType.PersonTypeDesc != "Groomsman" && c.PersonType.PersonTypeDesc != "Best man" &&
+                                    c.PersonType.PersonTypeDesc != "Maid of Honour" && c.PersonType.PersonTypeDesc != "Bridesmaid" &&
+                                    c.PersonType.PersonTypeDesc != "Bride" && c.PersonType.PersonTypeDesc != "Groom"); break;
+                    default:
+                        break;
                 }
 
-                //if (!foundExisting) //delete existing item
-                //{
-                //    _dbContext.WeddingPersons.Remove(item);
-                //}
-            }
-            foreach (var updateItem in weddingPersons)
-            {
-                var foundNew = true;
+                var list = query.ToList();
                 foreach (var item in list)
                 {
-                    if (item.ID == updateItem.ID)
-                        foundNew = false;
-                }
-                if (foundNew)
-                {
-                    WeddingPerson p = new WeddingPerson()
+                    // var foundExisting = false;
+                    foreach (var updateItem in weddingPersons)
                     {
-                        Name = updateItem.Name,
-                        Surname = updateItem.Surname,
-                        Email = updateItem.Email,
-                        Cellphone = updateItem.Cellphone,
-                        PersonTypeId = updateItem.PersonType != null ? updateItem.PersonType.ID : updateItem.PersonTypeId,
-                        WeddingID = wedding.ID,
-                        GuestCount = updateItem.GuestCount,
-                        FirstGuestName = updateItem.FirstGuestName,
-                        FirstGuestSurname = updateItem.FirstGuestSurname,
-                        DateCreated = DateTime.Now,
-                        DateModified = DateTime.Now
-                    };
-                    _dbContext.WeddingPersons.Add(p);
+                        if (item.ID == updateItem.ID)
+                        {
+                            // foundExisting = true;
+                            item.Name = updateItem.Name;
+                            item.Surname = updateItem.Surname;
+                            item.Email = updateItem.Email;
+                            item.Cellphone = updateItem.Cellphone;
+                            item.GuestCount = updateItem.GuestCount;
+                            item.PersonTypeId = updateItem.PersonType != null ? updateItem.PersonType.ID : updateItem.PersonTypeId;
+                            item.FirstGuestName = updateItem.FirstGuestName;
+                            item.FirstGuestSurname = updateItem.FirstGuestSurname;
+                            item.DateModified = DateTime.Now;
+                        }
+                    }
+
+                    //if (!foundExisting) //delete existing item
+                    //{
+                    //    _dbContext.WeddingPersons.Remove(item);
+                    //}
                 }
+                foreach (var updateItem in weddingPersons)
+                {
+                    var foundNew = true;
+                    foreach (var item in list)
+                    {
+                        if (item.ID == updateItem.ID)
+                            foundNew = false;
+                    }
+                    if (foundNew)
+                    {
+                        WeddingPerson p = new WeddingPerson()
+                        {
+                            Name = updateItem.Name,
+                            Surname = updateItem.Surname,
+                            Email = updateItem.Email,
+                            Cellphone = updateItem.Cellphone,
+                            PersonTypeId = updateItem.PersonType != null ? updateItem.PersonType.ID : updateItem.PersonTypeId,
+                            WeddingID = wedding.ID,
+                            GuestCount = updateItem.GuestCount,
+                            FirstGuestName = updateItem.FirstGuestName,
+                            FirstGuestSurname = updateItem.FirstGuestSurname,
+                            DateCreated = DateTime.Now,
+                            DateModified = DateTime.Now
+                        };
+                        _dbContext.WeddingPersons.Add(p);
+                    }
+                }
+                _dbContext.SaveChanges();
             }
-            _dbContext.SaveChanges();
+            catch (Exception ex)
+            {
+                _logger.SafeException(ex, "Unexpected error occurred while saving these people", TAG);
+            }
         }
+        #endregion
 
-        public List<WeddingPhoto> GetWeddingPhotos(string domain)
-        {
-            return _dbContext.WeddingPhotos.Where(c => c.Wedding.Domain.Equals(domain)).ToList();
-        }
-
+        #region CRUD
         public void DeleteWeddingPerson(WeddingPerson person)
         {
-            var dbperson = _dbContext.WeddingPersons.FirstOrDefault(c => c.ID.Equals(person.ID));
-            if (dbperson != null)
+            try
             {
-                _dbContext.WeddingPersons.Remove(dbperson);
-                _dbContext.SaveChanges();
-                return;
-            }
+                var dbperson = _dbContext.WeddingPersons.FirstOrDefault(c => c.ID.Equals(person.ID));
+                if (dbperson != null)
+                {
+                    _dbContext.WeddingPersons.Remove(dbperson);
+                    _dbContext.SaveChanges();
+                    return;
+                }
 
-            throw new Exception("Person not found in database");
+                _logger.RaiseException("Person being deleted could not be found", TAG);
+            }
+            catch (Exception ex)
+            {
+                _logger.SafeException(ex, "Unexpected error occurred while deleting this person", TAG);
+            }
         }
 
+        public void SavePerson(WeddingPerson weddingPerson, string domain)
+        {
+            try
+            {
+                var updatePerson = _dbContext.WeddingPersons.FirstOrDefault(c => c.ID.Equals(weddingPerson.ID));
+                if (updatePerson == null)
+                {
+                    _logger.RaiseException("Person being updated could not be found", TAG);
+                }
+                ObjectMap.BindObject(weddingPerson, updatePerson);
+                weddingPerson.WeddingID = GetWedding(domain).ID;
+                updatePerson.PersonTypeId = weddingPerson.PersonType != null ? weddingPerson.PersonType.ID : weddingPerson.PersonTypeId;
+                updatePerson.DateModified = DateTime.Now;
+                if (_dbContext.SaveChanges() != 1)
+                {
+                    _logger.RaiseException("More than one person has been affected by the update", TAG);
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.SafeException(ex, "Unexpected error occurred while updating this person", TAG);
+            }
+        }
+
+        public void AddPerson(WeddingPerson weddingPerson, string domain)
+        {
+            try
+            {
+                weddingPerson.WeddingID = GetWedding(domain).ID;
+                if (weddingPerson.WeddingID == null)
+                {
+                    _logger.RaiseException("No wedding could be found to map this person to", TAG);
+                }
+                weddingPerson.DateCreated = DateTime.Now;
+                weddingPerson.DateModified = DateTime.Now;
+                _dbContext.WeddingPersons.Add(weddingPerson);
+
+                if (_dbContext.SaveChanges() != 1)
+                {
+                    _logger.RaiseException("More than 1 person has been inserted into database. Something went wrong", TAG);
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.SafeException(ex, "Unexpected error occurred while adding this person", TAG);
+            }
+        }
+        #endregion
     }
 }

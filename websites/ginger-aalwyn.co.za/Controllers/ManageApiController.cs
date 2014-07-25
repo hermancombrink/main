@@ -126,7 +126,20 @@ namespace ginger.aalwyn.co.za.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        public void SavePerson(WeddingPerson weddingPerson)
+        {
+            Init();
+            _context.SavePerson(weddingPerson, _domain);
+        }
+
+        [HttpPost]
+        public void AddPerson(WeddingPerson weddingPerson)
+        {
+            Init();
+            _context.AddPerson(weddingPerson, _domain);
+        }
+
+        [HttpPost]
         public void DeletePerson(WeddingPerson person)
         {
             Init();

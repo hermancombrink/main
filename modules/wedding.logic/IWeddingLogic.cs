@@ -16,5 +16,8 @@ namespace wedding.logic
         void SaveBrideGroomInfo(string domain, WeddingSummary brideGroomInfo);
         void SaveWeddingInfo(string _domain, WeddingSummary weddingSummary);
         void SaveWeddingPersons(List<WeddingPerson> weddingPersons, string domain, WPersonType personType);
+
+        void SavePerson(WeddingPerson weddingPerson,string domain);
+        void AddPerson(WeddingPerson weddingPerson, string domain);
     }
 }
