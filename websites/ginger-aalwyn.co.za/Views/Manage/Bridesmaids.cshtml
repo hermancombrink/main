@@ -4,74 +4,78 @@
 <div class="row  text-center">
     <h2 class="text-center" style="display: inline-block">Manage Bridesmaids</h2>
 </div>
-<div class="row">
-    <button type="button" class="btn btn-success btn-lg btn-commit" ng-click="SaveChanges()">
+@*<div class="row">
+    <button type="button" class="btn btn-success btn-lg btn-commit" data-ng-click="SaveChanges()">
         Save
     </button>
-</div>
+</div>*@
 <div class="row">
     <div class="span4">
-        <h3>Current Bridesmaids
+        <h3>Current Guests
         </h3>
     </div>
 </div>
 <div class="row">
     <div class="span8 additem">
         <ul>
-            <li ng-repeat="item in Bridesmaids" class="listnone">
-
+            <li data-ng-repeat="item in Guests" class="listnone">
                 <div class="span2">{{$index+1}}. {{item.PersonType.PersonTypeDesc}}</div>
                 <div class="span2">{{item.Name}}  {{item.Surname}}</div>
                 <div class="span1">{{item.GuestCount}}</div>
                 <div class="span2">
-                    <button class="btn btn-primary btn-xs glyphicon glyphicon-ok-circle" ng-click="UpdateItem(item)"></button>
-                    <button class="btn btn-danger btn-xs glyphicon glyphicon-ban-circle" ng-click="RemoveItem(item)"></button>
+                    <button class="btn btn-primary btn-xs glyphicon glyphicon-ok-circle" data-ng-click="UpdateItem(item)"></button>
+                    <button class="btn btn-danger btn-xs glyphicon glyphicon-ban-circle" data-ng-click="RemoveItem(item)"></button>
                 </div>
             </li>
         </ul>
     </div>
 </div>
-<div class="row">
-    <div class="span8 additem">
-        <div class="span3">
-            <label>Name</label><input type="text" required ng-model="CurrentBridemaid.Name" />
+<form name="frmGuest" class="css-form" novalidate>
+    <div class="row">
+
+        <div class="span8 additem">
+            <div class="span3">
+                <label>Name</label><input type="text" required data-ng-model="CurrentGuest.Name" />
+            </div>
+            <div class="span3">
+                <label>Surname</label><input type="text" required data-ng-model="CurrentGuest.Surname" />
+            </div>
+
+            <div class="span3" data-ng-show="GuestCount > 1">
+                <label>+1 Name</label><input type="text" data-ng-model="CurrentGuest.FirstGuestName" />
+            </div>
+            <div class="span3" data-ng-show="GuestCount > 1">
+                <label>+1 Surname</label><input type="text" data-ng-model="CurrentGuest.FirstGuestSurname" />
+            </div>
+            <div class="span3">
+                <label data-ng-class="{'text-error' : frmGuest.email.$dirty && frmGuest.email.$invalid}">Email</label><input type="email" name="email" data-ng-model="CurrentGuest.Email" />
+            </div>
+            <div class="span3">
+                <label>Cell #</label><input type="text" data-ng-model="CurrentGuest.Cellphone" />
+            </div>
+            <div class="span3">
+               <label data-ng-class="{'text-error' : frmGuest.guestAmt.$dirty && frmGuest.guestAmt.$invalid}">Amount of Guest</label><input type="number" name="guestAmt" required data-ng-model="GuestCount" min="1" />
+            </div>
+            <div class="span3">
+                <label data-ng-class="{'text-error' :  frmGuest.typeSelect.$invalid && frmGuest.typeSelect.$dirty}">Type</label>
+                <select name="typeSelect" data-ng-options="PersonType.PersonTypeDesc for PersonType in PersonTypes track by PersonType.ID" data-ng-model="CurrentGuest.PersonType" required>
+                    <option value="">-- select type --</option>
+                </select>
+            </div>
         </div>
-        <div class="span3">
-            <label>Surname</label><input type="text" required ng-model="CurrentBridemaid.Surname" />
-        </div>
-        <div class="span3" ng-show="GuestCount > 1">
-            <label>+1 Name</label><input type="text" required ng-model="CurrentBridemaid.FirstGuestName" />
-        </div>
-        <div class="span3" ng-show="GuestCount > 1">
-            <label>+1 Surname</label><input type="text" required ng-model="CurrentBridemaid.FirstGuestSurname" />
-        </div>
-        <div class="span3">
-            <label>Email</label><input type="email" ng-model="CurrentBridemaid.Email" />
-        </div>
-        <div class="span3">
-            <label>Cell #</label><input type="text" ng-model="CurrentBridemaid.Cellphone" />
-        </div>
-        <div class="span3">
-            <label>Amount of Guests</label>
-            <input type="number" ng-model="GuestCount" />
-        </div>
-        <div class="span3">
-            <label>Type</label>
-            <select ng-required ng-model="CurrentBridemaid.PersonType" ng-options="PersonType.PersonTypeDesc for PersonType in PersonTypes track by PersonType.ID">
-                <option value="">-- select type --</option>
-            </select>
+
+    </div>
+    <div class="row" data-ng-show="isUpdate === false">
+        <div class="span8">
+            <button type="button" class="btn btn-success btn-lg pull-right" data-ng-click="AddPerson()" data-ng-disabled="frmGuest.$invalid">Add</button>
         </div>
     </div>
-</div>
-<div class="row" ng-show="isUpdate === false">
-    <div class="span8">
-        <button type="button" class="btn btn-success btn-lg pull-right" ng-click="AddPerson()">Add</button>
+    <div class="row" data-ng-show="isUpdate === true">
+        <div class="span8">
+            <button type="button" class="btn btn-success btn-lg pull-right" data-ng-click="AddPerson()" data-ng-disabled="frmGuest.$invalid" style="margin-left: 10px;">Update</button>
+            &nbsp;
+        <button type="button" class="btn btn-success btn-lg pull-right" data-ng-click="Reset()">Reset</button>&nbsp;
+        </div>
     </div>
-</div>
-<div class="row" ng-show="isUpdate === true">
-    <div class="span8">
-        <button type="button" class="btn btn-success btn-lg pull-right" ng-click="AddPerson()" style="margin-left: 10px;">Update</button>
-        &nbsp;
-        <button type="button" class="btn btn-success btn-lg pull-right" ng-click="Reset()">Reset</button>&nbsp;
-    </div>
-</div>
+
+</form>

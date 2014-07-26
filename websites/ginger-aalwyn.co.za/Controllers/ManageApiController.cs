@@ -133,10 +133,10 @@ namespace ginger.aalwyn.co.za.Controllers
         }
 
         [HttpPost]
-        public void AddPerson(WeddingPerson weddingPerson)
+        public WeddingPerson AddPerson(WeddingPerson weddingPerson)
         {
             Init();
-            _context.AddPerson(weddingPerson, _domain);
+            return  _context.AddPerson(weddingPerson, _domain);
         }
 
         [HttpPost]

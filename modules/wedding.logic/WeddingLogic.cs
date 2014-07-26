@@ -28,7 +28,8 @@ namespace wedding.logic
             _dbContext = new WeddingContext();
             _dbContext.Configuration.ProxyCreationEnabled = false;
             _dbContext.Configuration.LazyLoadingEnabled = false;
-            logger.Log.Info("Spawning new db context for weddings");
+            _logger = logger;
+            _logger.Log.Info("Spawning new db context for weddings");
         }
 
         #region Gets
@@ -417,28 +418,29 @@ namespace wedding.logic
             }
         }
 
-        public void AddPerson(WeddingPerson weddingPerson, string domain)
+        public WeddingPerson AddPerson(WeddingPerson weddingPerson, string domain)
         {
             try
             {
+                var insertPerson = new WeddingPerson();
+
                 weddingPerson.WeddingID = GetWedding(domain).ID;
                 if (weddingPerson.WeddingID == null)
                 {
-                    _logger.RaiseException("No wedding could be found to map this person to", TAG);
+                    _logger.GetRaiseException("No wedding could be found to map this person to", TAG);
                 }
-                weddingPerson.DateCreated = DateTime.Now;
-                weddingPerson.DateModified = DateTime.Now;
-                _dbContext.WeddingPersons.Add(weddingPerson);
-
-                if (_dbContext.SaveChanges() != 1)
-                {
-                    _logger.RaiseException("More than 1 person has been inserted into database. Something went wrong", TAG);
-                }
-                return;
+                ObjectMap.BindObject(weddingPerson, insertPerson);
+                insertPerson.PersonTypeId = weddingPerson.PersonType != null ? weddingPerson.PersonType.ID : weddingPerson.PersonTypeId;
+                insertPerson.DateCreated = DateTime.Now;
+                insertPerson.DateModified = DateTime.Now;
+                _dbContext.WeddingPersons.Add(insertPerson);
+                _dbContext.SaveChanges(); //check that only one item gets inserted into db base
+                insertPerson.PersonType = weddingPerson.PersonType;
+                return insertPerson;
             }
             catch (Exception ex)
             {
-                _logger.SafeException(ex, "Unexpected error occurred while adding this person", TAG);
+                throw _logger.GetSafeException(ex, "Unexpected error occurred while adding this person", TAG);
             }
         }
         #endregion

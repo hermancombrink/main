@@ -18,6 +18,6 @@ namespace wedding.logic
         void SaveWeddingPersons(List<WeddingPerson> weddingPersons, string domain, WPersonType personType);
 
         void SavePerson(WeddingPerson weddingPerson,string domain);
-        void AddPerson(WeddingPerson weddingPerson, string domain);
+        WeddingPerson AddPerson(WeddingPerson weddingPerson, string domain);
     }
 }
