@@ -12,15 +12,16 @@ namespace wedding.logic
     using System;
     using System.Collections.Generic;
     
-    public partial class WeddingPhoto
+    public partial class WeddingSetting
     {
         public int ID { get; set; }
-        public string RelavivePath { get; set; }
+        public string InviteContentType { get; set; }
+        public Nullable<long> InviteContentLength { get; set; }
+        public byte[] InviteConentBody { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateModified { get; set; }
         public int WeddingID { get; set; }
-        public int GalleryOrder { get; set; }
-        public string Name { get; set; }
+        public string MailAddress { get; set; }
     
         public virtual Wedding Wedding { get; set; }
     }

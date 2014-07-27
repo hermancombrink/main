@@ -40,6 +40,8 @@ namespace wedding.logic
         public int GuestCount { get; set; }
         public string FirstGuestName { get; set; }
         public string FirstGuestSurname { get; set; }
+        public bool InviteSent { get; set; }
+        public Nullable<bool> InviteAnswer { get; set; }
     
         public virtual PersonType PersonType { get; set; }
         public virtual Wedding Wedding { get; set; }

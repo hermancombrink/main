@@ -1,7 +1,7 @@
 ﻿// Main configuration file. Sets up AngularJS module and routes and any other config objects
 
 var clock;
-var appRoot = angular.module('main', ['ngRoute', 'ngGrid', 'ngResource', 'angularStart.services', 'angularStart.directives', 'ngAnimate', 'ui.bootstrap']);     //Define the main module
+var appRoot = angular.module('main', ['ngRoute', 'ngGrid', 'ngResource', 'angularStart.services',  'ngAnimate', 'ui.bootstrap', 'angularFileUpload']);     //Define the main module
 
 appRoot
     .config(['$routeProvider', function ($routeProvider) {
@@ -15,6 +15,7 @@ appRoot
             .when('/Photos', { templateUrl: '/Manage/Photos', controller: 'PhotoController' })
             .when('/SaveDate', { templateUrl: '/Manage/SaveDate', controller: 'MainController' })
             .when('/CheckList', { templateUrl: '/Manage/CheckList', controller: 'MainController' })
+            .when('/Invite', { templateUrl: '/Manage/Invite', controller: 'InviteController' })
             .otherwise({ redirectTo: '/Wedding' });
     }])
     .controller('RootController', ['$scope', '$route', '$routeParams', '$location', '$http', function ($scope, $route, $routeParams, $location, $http) {

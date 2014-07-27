@@ -4,12 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MyWeddingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MyWeddingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="MyWeddingModelStoreContainer">
-          <EntitySet Name="PersonType" EntityType="MyWeddingModel.Store.PersonType" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Wedding" EntityType="MyWeddingModel.Store.Wedding" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="WeddingPerson" EntityType="MyWeddingModel.Store.WeddingPerson" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="WeddingPhotos" EntityType="MyWeddingModel.Store.WeddingPhotos" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="PersonType" EntityType="MyWeddingModel.Store.PersonType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Wedding" EntityType="MyWeddingModel.Store.Wedding" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WeddingPerson" EntityType="MyWeddingModel.Store.WeddingPerson" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WeddingPhotos" EntityType="MyWeddingModel.Store.WeddingPhotos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WeddingSettings" EntityType="MyWeddingModel.Store.WeddingSettings" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_WeddingPerson_PersonType" Association="MyWeddingModel.Store.FK_WeddingPerson_PersonType">
             <End Role="PersonType" EntitySet="PersonType" />
             <End Role="WeddingPerson" EntitySet="WeddingPerson" />
@@ -25,6 +26,10 @@
           <AssociationSet Name="FK_WeddingPhotos_Wedding" Association="MyWeddingModel.Store.FK_WeddingPhotos_Wedding">
             <End Role="Wedding" EntitySet="Wedding" />
             <End Role="WeddingPhotos" EntitySet="WeddingPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeddingSettings_Wedding" Association="MyWeddingModel.Store.FK_WeddingSettings_Wedding">
+            <End Role="Wedding" EntitySet="Wedding" />
+            <End Role="WeddingSettings" EntitySet="WeddingSettings" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="PersonType">
@@ -76,6 +81,8 @@
           <Property Name="GuestCount" Type="int" Nullable="false" />
           <Property Name="FirstGuestName" Type="varchar" MaxLength="200" />
           <Property Name="FirstGuestSurname" Type="varchar" MaxLength="200" />
+          <Property Name="InviteSent" Type="bit" Nullable="false" />
+          <Property Name="InviteAnswer" Type="bit" />
         </EntityType>
         <EntityType Name="WeddingPhotos">
           <Key>
@@ -86,6 +93,21 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateModified" Type="datetime" Nullable="false" />
           <Property Name="WeddingID" Type="int" Nullable="false" />
+          <Property Name="GalleryOrder" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WeddingSettings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InviteContentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="InviteContentLength" Type="bigint" />
+          <Property Name="InviteConentBody" Type="varbinary(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="WeddingID" Type="int" Nullable="false" />
+          <Property Name="MailAddress" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK_WeddingPerson_PersonType">
           <End Role="PersonType" Type="MyWeddingModel.Store.PersonType" Multiplicity="0..1" />
@@ -135,6 +157,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WeddingSettings_Wedding">
+          <End Role="Wedding" Type="MyWeddingModel.Store.Wedding" Multiplicity="1" />
+          <End Role="WeddingSettings" Type="MyWeddingModel.Store.WeddingSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wedding">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WeddingSettings">
+              <PropertyRef Name="WeddingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -160,6 +194,11 @@
             <End Role="Wedding" EntitySet="Weddings" />
             <End Role="WeddingPhoto" EntitySet="WeddingPhotos" />
           </AssociationSet>
+          <EntitySet Name="WeddingSettings" EntityType="MyWeddingModel.WeddingSetting" />
+          <AssociationSet Name="FK_WeddingSettings_Wedding" Association="MyWeddingModel.FK_WeddingSettings_Wedding">
+            <End Role="Wedding" EntitySet="Weddings" />
+            <End Role="WeddingSetting" EntitySet="WeddingSettings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Wedding">
           <Key>
@@ -179,6 +218,7 @@
           <Property Type="Boolean" Name="ShowStory" Nullable="false" />
           <Property Type="Boolean" Name="ShowDirections" Nullable="false" />
           <NavigationProperty Name="WeddingPhotos" Relationship="MyWeddingModel.FK_WeddingPhotos_Wedding" FromRole="Wedding" ToRole="WeddingPhoto" />
+          <NavigationProperty Name="WeddingSettings" Relationship="MyWeddingModel.FK_WeddingSettings_Wedding" FromRole="Wedding" ToRole="WeddingSetting" />
         </EntityType>
         <EntityType Name="PersonType">
           <Key>
@@ -217,6 +257,8 @@
           <Property Type="Int32" Name="GuestCount" Nullable="false" />
           <Property Type="String" Name="FirstGuestName" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="FirstGuestSurname" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="InviteSent" Nullable="false" />
+          <Property Type="Boolean" Name="InviteAnswer" />
         </EntityType>
         <Association Name="FK_WeddingPerson_PersonType">
           <End Type="MyWeddingModel.PersonType" Role="PersonType" Multiplicity="0..1" />
@@ -264,6 +306,8 @@
           <Property Type="DateTime" Name="DateModified" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="WeddingID" Nullable="false" />
           <NavigationProperty Name="Wedding" Relationship="MyWeddingModel.FK_WeddingPhotos_Wedding" FromRole="WeddingPhoto" ToRole="Wedding" />
+          <Property Type="Int32" Name="GalleryOrder" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_WeddingPhotos_Wedding">
           <End Type="MyWeddingModel.Wedding" Role="Wedding" Multiplicity="1" />
@@ -273,6 +317,32 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="WeddingPhoto">
+              <PropertyRef Name="WeddingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WeddingSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="InviteContentType" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="InviteContentLength" />
+          <Property Type="Binary" Name="InviteConentBody" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateModified" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="WeddingID" Nullable="false" />
+          <Property Type="String" Name="MailAddress" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Wedding" Relationship="MyWeddingModel.FK_WeddingSettings_Wedding" FromRole="WeddingSetting" ToRole="Wedding" />
+        </EntityType>
+        <Association Name="FK_WeddingSettings_Wedding">
+          <End Type="MyWeddingModel.Wedding" Role="Wedding" Multiplicity="1" />
+          <End Type="MyWeddingModel.WeddingSetting" Role="WeddingSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wedding">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WeddingSetting">
               <PropertyRef Name="WeddingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -312,6 +382,8 @@
           <EntitySetMapping Name="WeddingPersons">
             <EntityTypeMapping TypeName="MyWeddingModel.WeddingPerson">
               <MappingFragment StoreEntitySet="WeddingPerson">
+                <ScalarProperty Name="InviteAnswer" ColumnName="InviteAnswer" />
+                <ScalarProperty Name="InviteSent" ColumnName="InviteSent" />
                 <ScalarProperty Name="FirstGuestSurname" ColumnName="FirstGuestSurname" />
                 <ScalarProperty Name="FirstGuestName" ColumnName="FirstGuestName" />
                 <ScalarProperty Name="GuestCount" ColumnName="GuestCount" />
@@ -339,10 +411,26 @@
           <EntitySetMapping Name="WeddingPhotos">
             <EntityTypeMapping TypeName="MyWeddingModel.WeddingPhoto">
               <MappingFragment StoreEntitySet="WeddingPhotos">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GalleryOrder" ColumnName="GalleryOrder" />
                 <ScalarProperty Name="WeddingID" ColumnName="WeddingID" />
                 <ScalarProperty Name="DateModified" ColumnName="DateModified" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="RelavivePath" ColumnName="RelavivePath" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeddingSettings">
+            <EntityTypeMapping TypeName="MyWeddingModel.WeddingSetting">
+              <MappingFragment StoreEntitySet="WeddingSettings">
+                <ScalarProperty Name="MailAddress" ColumnName="MailAddress" />
+                <ScalarProperty Name="WeddingID" ColumnName="WeddingID" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="InviteConentBody" ColumnName="InviteConentBody" />
+                <ScalarProperty Name="InviteContentLength" ColumnName="InviteContentLength" />
+                <ScalarProperty Name="InviteContentType" ColumnName="InviteContentType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

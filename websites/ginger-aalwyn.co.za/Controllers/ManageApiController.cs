@@ -145,6 +145,19 @@ namespace ginger.aalwyn.co.za.Controllers
             Init();
             _context.DeleteWeddingPerson(person);
         }
-      
+
+        public WeddingSetting GetWeddingSetting()
+        {
+            Init();
+            var setting = _context.GetWeddingSettings(_domain);
+            return setting;
+        }
+
+        [HttpPost]
+        public WeddingSetting SaveWeddingSetting(WeddingSetting setting)
+        {
+            Init();
+            return _context.UpdateSetting(setting, _domain);
+        }
     }
 }

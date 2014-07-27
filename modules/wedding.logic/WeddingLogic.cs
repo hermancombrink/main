@@ -444,5 +444,74 @@ namespace wedding.logic
             }
         }
         #endregion
+
+
+        public WeddingSetting UpdateSetting(WeddingSetting settings, string domain)
+        {
+            try
+            {
+                var dbSettings = _dbContext.WeddingSettings.FirstOrDefault(c => c.Wedding.Domain.Equals(domain));
+                bool _isUpdate = true;
+
+                if (dbSettings == null)
+                {
+                    _isUpdate = false;
+                    dbSettings = new WeddingSetting();
+                    dbSettings.DateCreated = DateTime.Now;
+                }
+                dbSettings.MailAddress = settings.MailAddress;
+                dbSettings.DateModified = DateTime.Now;
+                if (!_isUpdate)
+                    _dbContext.WeddingSettings.Add(dbSettings);
+                _dbContext.SaveChanges();
+                return dbSettings;
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unable to update wedding settings", TAG);
+            }
+        }
+
+        public WeddingSetting UpdateInvitePhoto(WeddingSetting settings, string domain)
+        {
+            try
+            {
+                var dbSettings = _dbContext.WeddingSettings.FirstOrDefault(c => c.Wedding.Domain.Equals(domain));
+                bool _isUpdate = true;
+
+                if (dbSettings == null)
+                {
+                    _isUpdate = false;
+                    dbSettings = new WeddingSetting();
+                    dbSettings.DateCreated = DateTime.Now;
+                    dbSettings.Wedding = GetWedding(domain);
+                }
+                dbSettings.InviteConentBody = settings.InviteConentBody;
+                dbSettings.InviteContentLength = settings.InviteContentLength;
+                dbSettings.InviteContentType = settings.InviteContentType;
+                dbSettings.DateModified = DateTime.Now;
+                if (!_isUpdate)
+                    _dbContext.WeddingSettings.Add(dbSettings);
+                _dbContext.SaveChanges();
+                return dbSettings;
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unable to update wedding invite photo", TAG);
+            }
+        }
+
+
+        public WeddingSetting GetWeddingSettings(string domain)
+        {
+            try
+            {
+                return _dbContext.WeddingSettings.Single(c => c.Wedding.Domain.Equals(domain));
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unable to get wedding settings", TAG);
+            }
+        }
     }
 }

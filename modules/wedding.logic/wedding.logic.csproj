@@ -91,6 +91,9 @@
     <Compile Include="WeddingPhoto.cs">
       <DependentUpon>MyWedding.tt</DependentUpon>
     </Compile>
+    <Compile Include="WeddingSetting.cs">
+      <DependentUpon>MyWedding.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="MyWedding.edmx">
@@ -128,7 +131,9 @@
       <Name>object.mapper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Partial\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -30,5 +30,6 @@ namespace wedding.logic
         public DbSet<PersonType> PersonTypes { get; set; }
         public DbSet<WeddingPerson> WeddingPersons { get; set; }
         public DbSet<WeddingPhoto> WeddingPhotos { get; set; }
+        public DbSet<WeddingSetting> WeddingSettings { get; set; }
     }
 }

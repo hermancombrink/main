@@ -211,6 +211,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageApiController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -354,6 +355,7 @@
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
+    <Content Include="Scripts\angular-file-upload.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -413,6 +415,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\manage\app.js" />
     <Content Include="Scripts\manage\directives.js" />
+    <Content Include="Scripts\manage\invite.js" />
     <Content Include="Scripts\manage\main.js" />
     <Content Include="Scripts\manage\services.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -466,6 +469,7 @@
     <Content Include="Views\Manage\Groomsmen.cshtml" />
     <Content Include="Views\Manage\Bridesmaids.cshtml" />
     <Content Include="Views\Manage\CheckList.cshtml" />
+    <Content Include="Views\Manage\Invite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,6 +13,8 @@
         <AssociationConnector Association="MyWeddingModel.FK_WeddingPerson_WeddingPerson" />
         <EntityTypeShape EntityType="MyWeddingModel.WeddingPhoto" Width="1.5" PointX="6.25" PointY="4" />
         <AssociationConnector Association="MyWeddingModel.FK_WeddingPhotos_Wedding" />
+        <EntityTypeShape EntityType="MyWeddingModel.WeddingSetting" Width="1.5" PointX="1.7874821917095605" PointY="10.982971345532206" />
+        <AssociationConnector Association="MyWeddingModel.FK_WeddingSettings_Wedding" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

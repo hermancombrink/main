@@ -60,6 +60,11 @@ namespace ginger.aalwyn.co.za.Controllers
         {
             return View();
         }
+
+        public ActionResult Invite()
+        {
+            return View();
+        }
         #endregion
     }
 }

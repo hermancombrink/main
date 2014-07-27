@@ -56,6 +56,16 @@ angularStartServices.factory('WebApiServce', ["$http", function ($http) {
         },
         AddPerson: function (person) {
             return $http.post("/api/ManageApi/AddPerson", JSON.stringify(person));
+        },
+        GetWeddingSetting: function ()
+        {
+            return $http.get("/api/ManageApi/GetWeddingSetting")
+        },
+        SaveWeddingSetting: function (email) {
+            var setting = {};
+            setting.MailAddress = email;
+            console.log(setting);
+            return $http.post("/api/ManageApi/SaveWeddingSetting", setting)
         }
     }
 }]);

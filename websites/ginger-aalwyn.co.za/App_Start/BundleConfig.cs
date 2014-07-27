@@ -27,6 +27,7 @@ namespace ginger.aalwyn.co.za
                         "~/Scripts/angular-resource.js",
                         "~/Scripts/angular-route.js",
                         "~/Scripts/angular-animate.js",
+                        "~/Scripts/angular-file-upload.js",
                          "~/Scripts/ui-bootstrap-tpls-0.8.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
@@ -40,7 +41,8 @@ namespace ginger.aalwyn.co.za
             "~/Scripts/manage/app.js",
             "~/Scripts/manage/services.js",
             "~/Scripts/manage/directives.js",
-            "~/Scripts/manage/main.js"
+            "~/Scripts/manage/main.js",
+            "~/Scripts/manage/invite.js"
             ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -50,7 +52,7 @@ namespace ginger.aalwyn.co.za
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                 "~/Content/bootstrap.css",
-                 //"~/Content/bootstrap-theme.css",
+                //"~/Content/bootstrap-theme.css",
                 "~/Content/bootstrap-responsive.css"
                 ));
 

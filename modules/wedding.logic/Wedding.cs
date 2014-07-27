@@ -18,6 +18,7 @@ namespace wedding.logic
         {
             this.WeddingPersons = new HashSet<WeddingPerson>();
             this.WeddingPhotos = new HashSet<WeddingPhoto>();
+            this.WeddingSettings = new HashSet<WeddingSetting>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,6 @@ namespace wedding.logic
     
         public virtual ICollection<WeddingPerson> WeddingPersons { get; set; }
         public virtual ICollection<WeddingPhoto> WeddingPhotos { get; set; }
+        public virtual ICollection<WeddingSetting> WeddingSettings { get; set; }
     }
 }
