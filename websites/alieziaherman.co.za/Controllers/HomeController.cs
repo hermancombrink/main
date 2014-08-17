@@ -1,7 +1,5 @@
-﻿using log4net.logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,7 +13,7 @@ namespace alieziaherman.co.za.Controllers
             ViewBag.Title = "Aliezia & Herman's Wedding";
             return View();
         }
-     
+
 
         public ActionResult Main()
         {

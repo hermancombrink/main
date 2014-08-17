@@ -1,0 +1,2 @@
+2014-08-04 20:36:16,044 [6] FATAL wedding.logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null - Unexpected error has occurred while getting the wedding information
+2014-08-04 21:01:33,548 [36] FATAL wedding.logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null - Unable to get wedding settings

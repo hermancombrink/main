@@ -1,0 +1,4 @@
+2014-08-03 22:40:05,649 [8] FATAL wedding.logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null - Unexpected error has occurred while getting the wedding information
+2014-08-03 22:40:05,681 [8] FATAL wedding.logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null - Unexpected error has occurred while getting the wedding information
+2014-08-03 22:41:52,098 [6] ERROR wedding.logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null - Unable to find wedding based on domain
+2014-08-03 22:43:39,084 [8] FATAL wedding.logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null - Unexpected error has occurred while getting the wedding information

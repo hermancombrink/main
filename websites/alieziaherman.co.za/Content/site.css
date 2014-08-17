@@ -5,8 +5,8 @@
     */
 @font-face {
   font-family: 'Monotype Corsiva';
-  src: url('bootstrap/fonts/MTCORSVA.eot');
-  src: url('bootstrap/fonts/MTCORSVA.eot?#iefix') format('embedded-opentype'), url('bootstrap/fonts/MTCORSVA.woff') format('woff'), url('bootstrap/fonts/MTCORSVA.ttf') format('truetype'), url('bootstrap/fonts/MTCORSVA.svg#MTCORSVA') format('svg');
+  src: url('fonts/MTCORSVA.eot');
+  src: url('fonts/MTCORSVA.eot?#iefix') format('embedded-opentype'), url('fonts/MTCORSVA.woff') format('woff'), url('fonts/MTCORSVA.ttf') format('truetype'), url('fonts/MTCORSVA.svg#MTCORSVA') format('svg');
 }
 
 body
@@ -14,7 +14,7 @@ body
     background-color: #727272 !important;
 }
 .container
-{
+{ 
     color: #727272;
     margin: 0 auto !important;
     padding-top:100px;
