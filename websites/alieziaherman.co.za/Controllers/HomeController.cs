@@ -51,7 +51,7 @@ namespace alieziaherman.co.za.Controllers
             return View(_context.GetWeddingByDomain(_weddingIdentifier));
         }
 
-        public ActionResult Event()
+        public ActionResult ContactUs()
         {
             return View(_context.GetWeddingByDomain(_weddingIdentifier));
         }
@@ -62,11 +62,6 @@ namespace alieziaherman.co.za.Controllers
         }
 
         public ActionResult OurStory()
-        {
-            return View(_context.GetWeddingByDomain(_weddingIdentifier));
-        }
-
-        public ActionResult RSVP()
         {
             return View(_context.GetWeddingByDomain(_weddingIdentifier));
         }

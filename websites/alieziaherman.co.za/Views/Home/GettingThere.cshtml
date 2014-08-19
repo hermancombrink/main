@@ -1,10 +1,16 @@
-﻿@{
+﻿@model wedding.logic.POCO.WeddingSummary
+@{
     Layout = null;
 }
 
-<div class="row">
+<div class="row bpad">
     <div>
         <h2>Getting There</h2>
     </div>
-  
+    <p>@Model.Wedding.Directions</p>
+    <p>
+        <div class="gmap">
+            <iframe src="@Model.Wedding.GoogleMapLink" class="gmap"></iframe>
+        </div>
+    </p>
 </div>

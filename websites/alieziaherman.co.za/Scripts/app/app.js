@@ -8,8 +8,7 @@ appRoot
             .when('/home/date', { templateUrl: '/home/date', controller: 'MainController' })
             .when('/home/gettingthere', { templateUrl: '/home/gettingthere', controller: 'MainController' })
             .when('/home/ourstory', { templateUrl: '/home/ourstory', controller: 'MainController' })
-            .when('/home/event', { templateUrl: '/home/event', controller: 'MainController' })
-            .when('/home/rsvp', { templateUrl: '/home/rsvp', controller: 'MainController' })
+            .when('/home/contactus', { templateUrl: '/home/contactus', controller: 'MainController' })
             .otherwise({ redirectTo: '/home' });
     }])
     .controller('RootController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
@@ -19,7 +18,6 @@ appRoot
         $scope.$on("UNLOAD", function () { self.stopLoading(); });
 
         $scope.$on('$routeChangeStart', function () {
-            console.log("Go router");
             $(".view-container").hide();
             self.startLoading();
         });
