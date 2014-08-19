@@ -121,6 +121,9 @@ body {
 .bpad {
     padding-bottom: 30px;
 }
+.tpad {
+    padding-top:50px;
+}
 
 .gmap {
     overflow: hidden !important;
