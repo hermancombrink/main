@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "send.mail", "modules\send.m
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alieziaherman.co.za", "websites\alieziaherman.co.za\alieziaherman.co.za.csproj", "{88AC640F-8B66-4A98-9E2F-2FFC7729B7FA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6E6151AB-A981-43E9-9A37-6914606FEBAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailerTests", "tests\MailerTests\MailerTests.csproj", "{04D2388A-3D96-46C6-B04E-2A36CA95E41E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,10 @@ Global
 		{88AC640F-8B66-4A98-9E2F-2FFC7729B7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88AC640F-8B66-4A98-9E2F-2FFC7729B7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88AC640F-8B66-4A98-9E2F-2FFC7729B7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D2388A-3D96-46C6-B04E-2A36CA95E41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D2388A-3D96-46C6-B04E-2A36CA95E41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D2388A-3D96-46C6-B04E-2A36CA95E41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D2388A-3D96-46C6-B04E-2A36CA95E41E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +95,6 @@ Global
 		{D16663C3-80F8-47A4-AB84-C6FEBE785957} = {18CA23ED-09BA-4D1D-AC4D-DA4BBD979751}
 		{DE47751F-2445-4EA2-AECF-9E6F02D7D22D} = {18CA23ED-09BA-4D1D-AC4D-DA4BBD979751}
 		{88AC640F-8B66-4A98-9E2F-2FFC7729B7FA} = {726B864E-04C0-4064-8BA3-92AA95855269}
+		{04D2388A-3D96-46C6-B04E-2A36CA95E41E} = {6E6151AB-A981-43E9-9A37-6914606FEBAC}
 	EndGlobalSection
 EndGlobal
