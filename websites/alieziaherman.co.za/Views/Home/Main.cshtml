@@ -1,12 +1,19 @@
-﻿@{
+﻿@model wedding.logic.POCO.WeddingSummary
+@{
     Layout = null;
 }
 
 <div class="row">
-    <div>
+    <div class="col-md-6">
         <h2>Bride</h2>
+            <h3>@Model.Bride.Name</h3>
+        <hr />
+        <p>@Model.Bride.Bio</p>
     </div>
-    <div>
+    <div class="col-md-6">
         <h2>Groom</h2>
+            <h3>@Model.Groom.Name</h3>
+        <hr />
+        <p>@Model.Groom.Bio</p>
     </div>
 </div>

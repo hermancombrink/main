@@ -17,10 +17,12 @@ using System.Data.Linq;
 using System.Reflection;
 using System.Data;
 using System.Diagnostics;
-using System.Data.Objects;
+
 using System.Configuration;
 using System.Web;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace wedding.logic
 {
