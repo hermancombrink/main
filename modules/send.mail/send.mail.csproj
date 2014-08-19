@@ -39,7 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMailer.cs" />
+    <Compile Include="IMailSetting.cs" />
+    <Compile Include="Mailer.cs" />
+    <Compile Include="MailSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\log4net.logging\log4net.logging.csproj">
+      <Project>{9b0285c5-4e35-4d13-b4d5-544556354f80}</Project>
+      <Name>log4net.logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
