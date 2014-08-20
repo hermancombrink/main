@@ -1,6 +1,7 @@
 ﻿using log4net.logging;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -29,10 +30,10 @@ namespace send.mail
             this.EnableSSL = true;
             ConfigureMailer();
             mailContext = new SmtpClient(SMTPServer, Port);
-            var auth = new NetworkCredential(Username, Password);
             mailContext.EnableSsl = EnableSSL;
-            mailContext.Credentials = auth;
+            
             mailContext.UseDefaultCredentials = false;
+            mailContext.DeliveryMethod = SmtpDeliveryMethod.Network;
             this.IsBodyHtml = IsBodyHtml;
             _logger.Info("Done setting up mailer", TAG);
 
@@ -43,22 +44,21 @@ namespace send.mail
             _logger.Info("Configuring mailer", TAG);
             try
             {
-                System.Configuration.AppSettingsReader reader = new System.Configuration.AppSettingsReader();
-                SMTPServer = reader.GetValue("smtpServer", typeof(string)).ToString();
-                Port = (int)reader.GetValue("smtpPort", typeof(int));
-                Username = reader.GetValue("smtpUserName", typeof(string)).ToString();
-                Password = reader.GetValue("smtpPassword", typeof(string)).ToString();
-                if (reader.GetValue("smtpSSL", typeof(bool)) != null)
-                    EnableSSL = (bool)reader.GetValue("smtpSSL", typeof(bool));
-                if (reader.GetValue("smtpHTML", typeof(bool)) != null)
-                    IsBodyHtml = (bool)reader.GetValue("smtpHTML", typeof(bool));
+                SMTPServer = ConfigurationManager.AppSettings["smtpServer"];
+                Port = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+                Username = ConfigurationManager.AppSettings["smtpUserName"];
+                Password = ConfigurationManager.AppSettings["smtpPassword"];
+                if (ConfigurationManager.AppSettings["smtpSSL"] != null)
+                    EnableSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["smtpSSL"]);
+                if (ConfigurationManager.AppSettings["smtpHTML"] != null)
+                    IsBodyHtml = Convert.ToBoolean(ConfigurationManager.AppSettings["smtpHTML"]);
             }
             catch (Exception ex)
             {
                 throw _logger.GetSafeException(ex, "Unable to configure mailer. Please refer to logs", TAG);
             }
         }
-        public async void SendMail(MailSetting setting)
+        public async Task SendMailAsync(MailSetting setting)
         {
             _logger.Info("Preparing to send mail", TAG);
             MailMessage msg = new MailMessage();
@@ -78,6 +78,10 @@ namespace send.mail
                     msg.Bcc.Add(item);
                 }
 
+            if (!string.IsNullOrEmpty(setting.From))
+                msg.From = new MailAddress(setting.From);
+            else
+                msg.From = new MailAddress(Username);
             msg.Body = setting.Content;
             msg.IsBodyHtml = IsBodyHtml;
             msg.Subject = setting.Subject;
@@ -88,7 +92,51 @@ namespace send.mail
                 }
             try
             {
+                 mailContext.Credentials = new NetworkCredential(Username, Password);
                 await mailContext.SendMailAsync(msg);
+            }
+            catch (Exception ex)
+            {
+                throw _logger.GetSafeException(ex, "Unable to send mail. Please refer to logs", TAG);
+            }
+        }
+
+        public void SendMail(MailSetting setting)
+        {
+            _logger.Info("Preparing to send mail", TAG);
+            MailMessage msg = new MailMessage();
+            if (setting.To != null)
+                foreach (var item in setting.To)
+                {
+                    msg.To.Add(item);
+                }
+            if (setting.CC != null)
+                foreach (var item in setting.CC)
+                {
+                    msg.CC.Add(item);
+                }
+            if (setting.BCC != null)
+                foreach (var item in setting.BCC)
+                {
+                    msg.Bcc.Add(item);
+                }
+
+            if (!string.IsNullOrEmpty(setting.From))
+                msg.From = new MailAddress(setting.From);
+            else
+                msg.From = new MailAddress(Username);
+            msg.Body = setting.Content;
+            msg.IsBodyHtml = IsBodyHtml;
+            msg.Subject = setting.Subject;
+            if (setting.attachments != null)
+                foreach (var item in setting.attachments)
+                {
+                    msg.Attachments.Add(item);
+                }
+            try
+            {
+                mailContext.Credentials = new NetworkCredential(Username, Password);
+                mailContext.Send(msg);
             }
             catch (Exception ex)
             {

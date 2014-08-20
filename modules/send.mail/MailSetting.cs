@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace send.mail
 {
-    public class MailSetting : send.mail.IMailSetting
+    public class MailSetting 
     {
-        public List<string> To { get; set; }
-        public List<string> CC { get; set; }
-
-        public List<string> BCC { get; set; }
+        public List<string> To = new List<string>();
+        public List<string> CC = new List<string>();
+        public List<string> BCC = new List<string>();
 
         public string Content { get; set; }
 
@@ -19,7 +18,7 @@ namespace send.mail
 
         public string Subject  { get; set; }
 
-        public List<System.Net.Mail.Attachment> attachments  { get; set; }
+        public List<System.Net.Mail.Attachment> attachments = new List<System.Net.Mail.Attachment>();
         
         public string BuildTemplate<T>(string templateName, T context)
         {
